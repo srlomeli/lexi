@@ -1,0 +1,58 @@
+flows:
+  start_wordle:
+    name: start a Wordle game
+    description: >
+      Start a new Wordle word-guessing game. Use when the user wants to play,
+      says "wordle", "new game", "play again", or says yes after being asked
+      whether they would like to play again.
+    steps:
+      - action: action_start_wordle
+
+  make_wordle_guess:
+    name: guess a word in Wordle
+    description: >
+      The user makes a guess in the Wordle game that is currently in progress.
+      Only start this when the whole message is a single word, or letters
+      spelled out one at a time (e.g. "crane", "c r a n e"), or the user
+      clearly names a word to guess (e.g. "my guess is crane"). A lone word
+      that looks like a greeting or reply, such as "hello" or "sorry", is a
+      guess. A sentence or question, such as "hello can you hear me" or "you
+      shouldn't take the first word", is NOT a guess: never pick a word out
+      of it.
+    if: slots.wordle_active
+    steps:
+      - collect: wordle_guess
+        description: >
+          The word the user is guessing, copied EXACTLY as the user typed or
+          spelled it, even if it is misspelled, not a real word, or the wrong
+          length (e.g. "craen", "cat", "c r a n e"). Never correct or change it.
+      - action: action_score_guess
+
+  give_up_wordle:
+    name: give up on the Wordle game
+    description: >
+      The user wants to stop the current Wordle game and see the answer,
+      e.g. "I give up", "tell me the word", "reveal the answer".
+      A single 5-letter word on its own, such as "abort", "leave" or "pause",
+      is a guess, not a request to give up.
+    if: slots.wordle_active
+    steps:
+      - action: action_give_up
+
+  wordle_rules:
+    name: explain how to play Wordle
+    description: >
+      Explain the rules of Wordle and what the letter results mean, e.g.
+      "how do I play?", "what does in word mean?", "explain the rules".
+    steps:
+      - action: utter_wordle_rules
+
+  voice_mode:
+    name: explain voice mode
+    description: >
+      Explain the voice features: speaking guesses or questions with the
+      Speak buttons, and having messages read out loud. Use when the user asks
+      about voice, speaking, a microphone, or reading aloud, e.g. "is there a
+      voice mode?", "can I talk to you?", "can you read it out loud?".
+    steps:
+      - action: utter_voice_mode

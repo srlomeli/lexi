@@ -1,0 +1,59 @@
+version: "3.1"
+
+actions:
+  - action_start_wordle
+  - action_score_guess
+  - action_give_up
+
+slots:
+  # Set only by custom actions (the LLM can't change them).
+  wordle_answer:
+    type: text
+    mappings:
+      - type: controlled
+  wordle_guesses:
+    type: list
+    initial_value: []
+    mappings:
+      - type: controlled
+  wordle_active:
+    type: bool
+    initial_value: false
+    mappings:
+      - type: controlled
+  # Filled by the LLM from what the player typed or said.
+  wordle_guess:
+    type: text
+    mappings:
+      - type: from_llm
+
+responses:
+  utter_ask_wordle_guess:
+    - text: "What's your guess? Type or say any 5-letter word."
+
+  utter_wordle_rules:
+    - text: |
+        Here's how to play:
+        - I pick a secret 5-letter word. You have 6 guesses.
+        - After each guess, I tell you about every letter:
+          ✓ CORRECT: right letter, right spot
+          ● IN WORD: the letter is in the word, but in a different spot
+          ✕ NOT IN WORD: the letter isn't in the word
+        - Guesses that aren't real words don't count against you.
+        - There's no timer. Say "I give up" any time to see the word.
+    - text: "I pick a secret five-letter word and you have six guesses. After each guess I'll tell you which letters are correct, which are in the word but in a different spot, and which aren't in the word. Words I don't know won't count against you, there's no timer, and you can say I give up any time."
+      channel: "browser_audio"
+
+  utter_voice_mode:
+    - text: |
+        Yes! Voice mode lets us just talk. I read my replies out loud, then listen for your answer, so you don't need to press anything.
+        - Turn it on with the button below, or with 🎙️ Voice mode at the top of the page.
+        - Say a word, spell it like C, R, A, N, E, or ask me anything.
+        - Want me to read without listening? Choose "Read aloud only".
+      buttons:
+        - title: "🎙️ Start voice mode"
+          payload: "client:voice_mode_on"
+        - title: "🔊 Read aloud only"
+          payload: "client:read_aloud_on"
+    - text: "Yes! Turn on voice mode with the button at the top of the page. I'll read my replies out loud, then listen for your answer, so you can just talk to me."
+      channel: "browser_audio"

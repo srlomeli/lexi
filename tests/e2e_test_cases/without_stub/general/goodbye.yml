@@ -6,4 +6,3 @@ test_cases:
         - flow_started: "goodbye_flow"
         - bot_uttered:
             utter_name: "utter_goodbye"
-        - flow_started: "leave_feedback"

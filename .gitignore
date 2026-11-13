@@ -233,3 +233,6 @@ story_graph.dot
 .vscode/
 .idea/
 
+
+# Demo on/off script state
+deploy/run/

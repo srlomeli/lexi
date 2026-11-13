@@ -17,6 +17,15 @@ action_endpoint:
 # By default the conversations are stored in memory.
 # https://rasa.com/docs/rasa-pro/production/tracker-stores
 
+# Conversations (and each player's game slots) are saved to a local SQLite
+# file so they survive server restarts. The file is gitignored (*.db).
+# For Postgres instead: dialect "postgresql", plus url, port, username,
+# password and db (the database name).
+tracker_store:
+  type: SQL
+  dialect: "sqlite"
+  db: "rasa_tracker.db"
+
 #tracker_store:
 #    type: redis
 #    url: <host of the redis instance, e.g. localhost>
@@ -49,7 +58,7 @@ action_endpoint:
 nlg:
   type: rephrase
   llm:
-    model_group: gemini-3-5-flash
+    model_group: gemini-3-1-flash-lite
   prompt_template: prompts/rephraser_demo_personality_prompt.jinja2
   rephrase_all: False
   summarize_history: False
@@ -59,13 +68,14 @@ model_groups:
     models:
       - provider: gemini
         model: gemini-3.5-flash
-        timeout: 15
-  - id: gemini-3-5-flash-lite
+        timeout: 30
+  - id: gemini-3-1-flash-lite
     models:
       - provider: gemini
-        model: gemini-3.5-flash-lite
-        timeout: 15
-  - id: gemini-embeddings
-    models:
-      - provider: gemini
-        model: gemini-embedding-001
+        model: gemini-3.1-flash-lite
+        timeout: 30
+    # Retry brief Gemini outages (503 "high demand") instead of failing the turn.
+    router:
+      routing_strategy: simple-shuffle
+      num_retries: 3
+      retry_after: 1

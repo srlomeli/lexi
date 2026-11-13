@@ -1,5 +1,21 @@
 responses:
+  # Shown when the bot can't tell what the player wants. Always says what to
+  # do next, so nobody is left stuck. Not rephrased, so it stays predictable.
   utter_no_relevant_answer_found:
-    - text: I’m sorry, I can’t help with that.
-      metadata:
-        rephrase: True
+    - text: |
+        Sorry, I didn't catch that. You can say:
+        - "New game" to start playing
+        - "How do I play?" to hear the rules
+        - Any 5-letter word, to guess during a game
+    - text: "Sorry, I didn't catch that. You can say new game to start playing, or how do I play to hear the rules."
+      channel: "browser_audio"
+
+  # Rasa's built-in fallback; overridden with the same helpful message.
+  utter_cannot_handle:
+    - text: |
+        Sorry, I didn't catch that. You can say:
+        - "New game" to start playing
+        - "How do I play?" to hear the rules
+        - Any 5-letter word, to guess during a game
+    - text: "Sorry, I didn't catch that. You can say new game to start playing, or how do I play to hear the rules."
+      channel: "browser_audio"

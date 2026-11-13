@@ -4,17 +4,8 @@ assistant_id: exhaustive-alignment
 pipeline:
 - name: SearchReadyLLMCommandGenerator
   llm:
-    model_group: gemini-3-5-flash
+    model_group: gemini-3-1-flash-lite
   flow_retrieval:
     active: false
 policies:
 - name: FlowPolicy
-- name: EnterpriseSearchPolicy
-  vector_store:
-    type: faiss
-    source: ./docs
-  llm:
-    model_group: gemini-3-5-flash-lite
-  embeddings:
-    model_group: gemini-embeddings
-  check_relevancy: true

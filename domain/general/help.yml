@@ -4,22 +4,22 @@ slots:
   example_questions:
     type: text
     initial_value: |
-      - What can you do?
-      - Connect me to a human
-      - Browse FAQs
+      - New game
+      - How do I play?
+      - I give up
     mappings:
       - type: controlled
 
 responses:
   utter_what_can_you_do:
     - text: |
-        I can help you with a few basics like:
-        - Connecting you to a human
-        - Help you try out the FAQs
-        - Collect your feedback
+        I'm a Wordle-style word game. I can:
+        - Start a new game (say "new game")
+        - Explain the rules (say "how do I play?")
+        - Reveal the word if you're stuck (say "I give up")
       metadata:
         rephrase: True
-    - text: "I can help you with a few things like connecting you to a human, testing out our FAQs, or collecting your feedback."
+    - text: "I'm a word-guessing game. Say new game to play, how do I play for the rules, or I give up to hear the word."
       channel: "browser_audio"
       metadata:
         rephrase: True

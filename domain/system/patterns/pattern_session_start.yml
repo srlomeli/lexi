@@ -2,11 +2,11 @@ version: "3.1"
 responses:
   utter_welcome:
     - text: |
-        Hi there! I'm {agent_name} 👋. I'm a starter kit with some example skills to help you get going. Add your own flows and FAQs to make me your own.
+        Hi there! I'm {agent_name} 👋. Let's play a relaxing word-guessing game. There's no timer and no pressure.
 
-        Try a few examples:
+        You can say:
         {example_questions}
-    - text: "Hi there! I'm {agent_name}. I'm here to help. How can I assist you today?"
+    - text: "Hi there! I'm {agent_name}. Would you like to play a word-guessing game? Just say new game."
       channel: "browser_audio"
   utter_help:
     - text: "What can I help you with?"
@@ -16,6 +16,6 @@ responses:
 slots:
   agent_name:
     type: text
-    initial_value: "Riley"
+    initial_value: "Lexi"
     mappings:
       - type: controlled

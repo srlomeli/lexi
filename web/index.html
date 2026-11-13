@@ -1,0 +1,1004 @@
+<!doctype html>
+<!--
+########################################
+# Name: Salvador Lomeli
+# Course: AI 380 Human-AI Interaction - HW3: Wordle for Everyone
+# GenAI: Claude (Claude Code) wrote this web page.
+# Description: Accessible web front end. It talks to Rasa's REST channel and
+#   draws the board from the "wordle_board" JSON that actions/action_wordle.py
+#   sends. All game rules (answers, validation, scoring) stay in Python; this
+#   page only shows results and collects input.
+#
+# Run:  rasa run --cors "*"        (REST channel on http://localhost:5005)
+#       then open web/index.html in Chrome, Edge, or Safari.
+########################################
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lexi's Word Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ---------- Color tokens (contrast ratios are listed in web/README.md) ---------- */
+:root {
+  --page: #FAF8F3;  --surface: #FFFFFF;  --text: #1F1F1F;  --muted: #4A4A4A;
+  --line: #767676;  --primary: #1A4FD6;  --primary-text: #FFFFFF;  --focus: #1A4FD6;
+  --danger: #A12A1E;
+
+  --empty-bg: #FFFFFF;    --empty-border: #767676;
+  --correct-bg: #1D6F42;  --correct-text: #FFFFFF;  --correct-border: #1D6F42;  --correct-border-style: solid;
+  --present-bg: #F2C14E;  --present-text: #1F1F1F;  --present-border: #6B4C00;  --present-border-style: dashed;
+  --absent-bg: #E4E4E4;   --absent-text: #333333;   --absent-border: #6B6B6B;  --absent-border-style: dotted;
+}
+/* "Shapes and words only" style: no hue at all, so it reads the same in grayscale. */
+:root[data-style="mono"] {
+  --correct-bg: #111111;  --correct-text: #FFFFFF;  --correct-border: #111111;
+  --present-bg: #FFFFFF;  --present-text: #111111;  --present-border: #111111;
+  --absent-bg: #E4E4E4;   --absent-text: #333333;   --absent-border: #6B6B6B;
+  --primary: #111111;
+}
+/* "High contrast, dark" style. */
+:root[data-style="dark"] {
+  --page: #000000;  --surface: #121212;  --text: #FFFFFF;  --muted: #D0D0D0;
+  --line: #9E9E9E;  --primary: #FFD23F;  --primary-text: #000000;  --focus: #FFD23F;
+  --danger: #FF8A80;
+  --empty-bg: #000000;    --empty-border: #9E9E9E;
+  --correct-bg: #6EF0A0;  --correct-text: #000000;  --correct-border: #6EF0A0;
+  --present-bg: #FFD23F;  --present-text: #000000;  --present-border: #FFFFFF;
+  --absent-bg: #000000;   --absent-text: #D0D0D0;   --absent-border: #D0D0D0;
+}
+
+/* ---------- Base ---------- */
+html { font-size: calc(112.5% * var(--scale, 1)); }
+:root[data-size="large"]  { --scale: 1.2; }
+:root[data-size="xlarge"] { --scale: 1.4; }
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--page); color: var(--text);
+  font-family: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+h1, h2 { line-height: 1.2; margin: 0 0 .5rem; }
+h1 { font-size: 1.6rem; }
+h2 { font-size: 1.2rem; }
+p { margin: 0 0 .75rem; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Big, obvious focus ring on everything. */
+:focus-visible { outline: 4px solid var(--focus); outline-offset: 3px; }
+
+.skip { position: absolute; left: 1rem; top: -10rem; background: var(--primary);
+  color: var(--primary-text); padding: .75rem 1rem; border-radius: .5rem; z-index: 10; }
+.skip:focus { top: 1rem; }
+
+/* ---------- Buttons (all at least 44 x 44 px) ---------- */
+button, .btn {
+  font: inherit; font-weight: 700; min-height: 2.75rem; min-width: 2.75rem;
+  padding: .55rem 1rem; border-radius: .6rem; cursor: pointer;
+  border: 2px solid var(--line); background: var(--surface); color: var(--text);
+}
+button:hover { filter: brightness(.95); }
+button.primary { background: var(--primary); border-color: var(--primary); color: var(--primary-text); }
+button.danger { border-color: var(--danger); color: var(--danger); }
+button[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: var(--primary-text); }
+button:disabled { opacity: .55; cursor: not-allowed; }
+
+/* ---------- Layout ---------- */
+header.top {
+  display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; justify-content: space-between;
+  padding: 1rem; border-bottom: 2px solid var(--line); background: var(--surface);
+}
+header.top .tagline { color: var(--muted); margin: 0; }
+header.top nav { display: flex; flex-wrap: wrap; gap: .5rem; }
+#voice-btn[aria-pressed="true"] { background: var(--primary); color: var(--primary-text); border-color: var(--primary); }
+main { max-width: 72rem; margin: 0 auto; padding: 1rem; display: grid; gap: 1.25rem; }
+@media (min-width: 62rem) {
+  main { grid-template-columns: minmax(0, 1fr) minmax(0, 24rem); align-items: start; }
+}
+.panel { background: var(--surface); border: 2px solid var(--line); border-radius: .9rem; padding: 1rem; }
+.stack > * + * { margin-top: 1rem; }
+
+/* ---------- Legend ---------- */
+.legend { display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; list-style: none; padding: 0; margin: 0; }
+.legend li { display: flex; align-items: center; gap: .6rem; }
+.legend .tile { --tile: 2.6rem; }
+
+/* ---------- Game column ---------- */
+.game { position: relative; display: grid; gap: .75rem; max-width: 34rem; width: 100%; margin: 0 auto; }
+.left { font-size: 1.05rem; font-weight: 700; margin: 0; text-align: center; }
+
+/* ---------- Pop-up note over the board ---------- */
+.toast { position: absolute; top: 2rem; left: 50%; transform: translateX(-50%); z-index: 5;
+  max-width: min(26rem, calc(100% - 1rem)); width: max-content; margin: 0; cursor: pointer;
+  background: var(--text); color: var(--page); border: 3px solid var(--page); border-radius: .6rem;
+  padding: .7rem 1rem; font-size: 1.1rem; font-weight: 700; text-align: center;
+  box-shadow: 0 .4rem 1rem rgb(0 0 0 / .3); transition: opacity .4s; }
+.toast.error { border-color: var(--danger); }
+.toast.fading { opacity: 0; }
+
+/* ---------- Board ---------- */
+.board { list-style: none; margin: 0 auto; padding: 0; display: grid; gap: .45rem; justify-content: center; }
+.row { display: flex; gap: .45rem; align-items: center; }
+.row .num { width: 1.6rem; text-align: right; color: var(--muted); font-weight: 700; }
+.tile {
+  --tile: clamp(2.4rem, min(14vw, 6.2vh), 4.2rem);
+  width: var(--tile); height: calc(var(--tile) * 1.15); padding: .15rem;
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+  border: 3px solid var(--empty-border); border-radius: .55rem;
+  background: var(--empty-bg); color: var(--text); font-weight: 700; text-transform: uppercase;
+  min-width: 0; min-height: 0; line-height: 1.05;
+}
+.tile .l { font-size: calc(var(--tile) * .46); }
+.tile .s { font-size: max(.62rem, calc(var(--tile) * .16)); display: flex; gap: .15em; align-items: center;
+  white-space: nowrap; text-transform: none; }
+.tile.typed { border-color: var(--text); border-width: 4px; }
+.tile.correct { background: var(--correct-bg); color: var(--correct-text);
+  border: 4px var(--correct-border-style) var(--correct-border); }
+.tile.present { background: var(--present-bg); color: var(--present-text);
+  border: 4px var(--present-border-style) var(--present-border); }
+.tile.absent  { background: var(--absent-bg); color: var(--absent-text);
+  border: 3px var(--absent-border-style) var(--absent-border); }
+.tile.absent .l { text-decoration: line-through; text-decoration-thickness: .08em; }
+button.tile { cursor: pointer; }
+main:has(#guess-input:focus) .row.current { outline: 4px solid var(--focus); outline-offset: 4px; border-radius: .6rem; }
+.row.fresh .tile { animation: pop .25s ease-out both; }
+.row.fresh .tile:nth-child(3) { animation-delay: .05s; } .row.fresh .tile:nth-child(4) { animation-delay: .1s; }
+.row.fresh .tile:nth-child(5) { animation-delay: .15s; } .row.fresh .tile:nth-child(6) { animation-delay: .2s; }
+@keyframes pop { from { transform: scale(.85); } to { transform: scale(1); } }
+:root[data-motion="reduce"] *, :root[data-motion="reduce"] *::before { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+.explain { font-size: 1.05rem; margin: 0; }
+.explain:not(:empty) { background: var(--surface); border: 2px dashed var(--line); padding: .6rem .9rem; border-radius: .5rem; }
+
+
+/* ---------- On-screen keyboard ---------- */
+.keyboard { display: grid; gap: .4rem; }
+.krow { display: flex; flex-wrap: wrap; gap: .35rem; justify-content: center; }
+.key { flex: 1 1 0; min-width: 2.75rem; max-width: 4rem; min-height: 3.4rem; padding: .2rem;
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1; font-size: 1.15rem; }
+.key.wide { max-width: 7.5rem; flex-grow: 2; font-size: 1rem; }
+.key .s { font-size: .75rem; }
+.key.correct { background: var(--correct-bg); color: var(--correct-text); border: 3px var(--correct-border-style) var(--correct-border); }
+.key.present { background: var(--present-bg); color: var(--present-text); border: 3px var(--present-border-style) var(--present-border); }
+.key.absent  { background: var(--absent-bg); color: var(--absent-text); border: 3px var(--absent-border-style) var(--absent-border); }
+.keyboard.abc .krow { justify-content: flex-start; }
+
+.actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+/* ---------- Conversation log ---------- */
+.log { list-style: none; padding: 0; margin: 0; max-height: 26rem; overflow-y: auto; display: grid; gap: .5rem; }
+.log li { padding: .5rem .75rem; border-radius: .6rem; white-space: pre-line; border: 2px solid var(--line); }
+.log li.you { background: var(--page); margin-left: 2rem; }
+.log li.lexi { background: var(--surface); margin-right: 1rem; }
+.log li.note { border-style: dashed; color: var(--muted); }
+.log .who { display: block; font-weight: 700; font-size: .9rem; color: var(--muted); }
+.ask { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
+.ask input, textarea {
+  flex: 1 1 10rem; min-width: 0; font: inherit; min-height: 2.75rem; padding: .4rem .7rem;
+  border: 2px solid var(--line); border-radius: .5rem; background: var(--surface); color: var(--text);
+}
+textarea { width: 100%; min-height: 6rem; resize: vertical; }
+
+/* ---------- Dialogs ---------- */
+dialog { max-width: min(40rem, calc(100vw - 2rem)); width: 100%; border: 3px solid var(--line);
+  border-radius: 1rem; background: var(--surface); color: var(--text); padding: 1.25rem; }
+dialog::backdrop { background: rgb(0 0 0 / .55); }
+dialog .close-row { display: flex; justify-content: flex-end; gap: .5rem; margin-top: 1rem; flex-wrap: wrap; }
+fieldset { border: 2px solid var(--line); border-radius: .6rem; margin: 0 0 1rem; padding: .5rem 1rem 1rem; }
+legend { font-weight: 700; padding: 0 .3rem; }
+.choice { display: flex; align-items: center; gap: .6rem; min-height: 2.75rem; }
+.choice input { width: 1.4rem; height: 1.4rem; accent-color: var(--primary); }
+.hint { color: var(--muted); font-size: .95rem; }
+
+[hidden] { display: none !important; }
+#end-dlg { max-width: min(28rem, calc(100vw - 2rem)); text-align: center; }
+#end-dlg h2 { font-size: 1.5rem; }
+#end-dlg .close-row { justify-content: center; }
+.end-board { display: grid; gap: .3rem; justify-content: center; margin: 1rem 0; }
+.end-board .row { gap: .3rem; }
+.end-board .tile { --tile: 2.4rem; }
+</style>
+</head>
+<body>
+<a class="skip" href="#guess-input">Skip to the guess box</a>
+
+<header class="top">
+  <div>
+    <h1>Lexi's Word Game</h1>
+    <p class="tagline">Guess the 5-letter word. No timer, no pressure.</p>
+  </div>
+  <nav aria-label="Game menu">
+    <button type="button" id="voice-btn" aria-pressed="false" hidden>🎙️ Voice mode: Off</button>
+    <button type="button" id="new-btn">New game</button>
+    <button type="button" class="danger" id="giveup-btn">I give up</button>
+    <button type="button" id="help-btn">Help</button>
+    <button type="button" id="settings-btn">Settings</button>
+  </nav>
+</header>
+
+<main>
+  <!-- ======== Left: the game ======== -->
+  <div class="stack">
+    <section class="game" aria-labelledby="board-h">
+      <h2 id="board-h" class="sr-only">Your guesses</h2>
+      <p class="left" id="left"></p>
+      <p class="toast" id="toast" hidden></p>
+      <ol class="board" id="board"></ol>
+      <p class="explain" id="explain" aria-live="polite"></p>
+      <p class="sr-only" id="status" role="status" aria-live="polite">Welcome! Starting a new game…</p>
+
+      <form class="guess-form" id="guess-form" autocomplete="off">
+        <label for="guess-input" class="sr-only">Your guess (5 letters). Type letters, then press Enter.</label>
+        <input id="guess-input" class="sr-only" name="guess" inputmode="none" autocapitalize="characters"
+               spellcheck="false" aria-describedby="counter">
+        <p class="sr-only" id="counter" aria-live="polite">0 of 5 letters</p>
+        <div class="keyboard" id="keyboard" role="group" aria-label="On-screen keyboard"></div>
+      </form>
+    </section>
+  </div>
+
+  <!-- ======== Right: conversation + notebook ======== -->
+  <div class="stack">
+    <section class="panel" aria-labelledby="log-h">
+      <h2 id="log-h">Conversation with Lexi</h2>
+      <ol class="log" id="log" aria-live="off"></ol>
+      <form class="ask" id="ask-form" autocomplete="off">
+        <label for="ask-input" class="sr-only">Ask Lexi something</label>
+        <input id="ask-input" placeholder="Ask Lexi, e.g. how do I play?">
+        <button type="submit">Send</button>
+        <button type="button" id="ask-mic-btn" aria-pressed="false" hidden>🎤 Speak</button>
+        <button type="button" id="repeat-btn">Repeat last message</button>
+      </form>
+    </section>
+
+    <section class="panel" aria-labelledby="note-h">
+      <h2 id="note-h">My letter notebook</h2>
+      <p class="hint" id="note-hint">Jot down letters you suspect. Only you see this. It does not change the game.</p>
+      <textarea id="notebook" aria-labelledby="note-h" aria-describedby="note-hint"></textarea>
+      <button type="button" id="note-clear" style="margin-top:.5rem">Clear notebook</button>
+    </section>
+  </div>
+</main>
+
+<!-- ======== Help ======== -->
+<dialog id="help-dlg" aria-labelledby="help-h">
+  <h2 id="help-h">How to play</h2>
+  <ol>
+    <li>Lexi picks a secret 5-letter word. You have <span class="max-n">6</span> guesses.</li>
+    <li>Type a word on your keyboard or tap the letters under the board, then press <b>Guess</b>. You can also talk to Lexi with <b>Voice mode</b> or the chat.</li>
+    <li>Every letter gets one of three results:</li>
+  </ol>
+  <ul class="legend" id="help-legend" style="margin-bottom:1rem"></ul>
+  <p>Select any colored letter on the board to hear why it got that result.</p>
+  <p>Words Lexi doesn't know <b>never</b> use up a guess. There is no timer.</p>
+  <p>Stuck? Press <b>I give up</b> and Lexi will kindly tell you the word.</p>
+  <p class="hint">Keyboard: type letters anywhere, Backspace to delete, Enter to guess.
+    On the board, use the arrow keys to move between letters.</p>
+  <div class="close-row"><button type="button" class="primary" data-close>Close</button></div>
+</dialog>
+
+<!-- ======== Settings ======== -->
+<dialog id="settings-dlg" aria-labelledby="settings-h">
+  <h2 id="settings-h">Settings</h2>
+  <p class="hint">Your choices are saved on this device.</p>
+  <fieldset>
+    <legend>Letter feedback style</legend>
+    <label class="choice"><input type="radio" name="style" value="standard"> Colors, symbols, and words</label>
+    <label class="choice"><input type="radio" name="style" value="mono"> Symbols and words only (no color)</label>
+    <label class="choice"><input type="radio" name="style" value="dark"> High contrast, dark background</label>
+  </fieldset>
+  <fieldset>
+    <legend>Text size</legend>
+    <label class="choice"><input type="radio" name="size" value="normal"> Normal</label>
+    <label class="choice"><input type="radio" name="size" value="large"> Large</label>
+    <label class="choice"><input type="radio" name="size" value="xlarge"> Extra large</label>
+  </fieldset>
+  <fieldset>
+    <legend>On-screen keyboard</legend>
+    <label class="choice"><input type="radio" name="layout" value="qwerty"> Like a computer keyboard (QWERTY)</label>
+    <label class="choice"><input type="radio" name="layout" value="abc"> Alphabetical (A to Z)</label>
+  </fieldset>
+  <fieldset>
+    <legend>Sound and motion</legend>
+    <label class="choice"><input type="checkbox" id="opt-read"> Read Lexi's messages out loud</label>
+    <label class="choice"><input type="checkbox" id="opt-motion"> Turn off animations</label>
+  </fieldset>
+  <fieldset>
+    <legend>Game server (for helpers)</legend>
+    <label for="opt-server">Rasa address</label>
+    <input id="opt-server" style="width:100%;font:inherit;min-height:2.75rem;padding:.3rem .6rem">
+    <p class="hint" id="voice-note"></p>
+  </fieldset>
+  <fieldset>
+    <legend>New player</legend>
+    <p class="hint">Clears this device's game, conversation and notebook for someone new.</p>
+    <button type="button" id="reset-btn">Start fresh for a new player</button>
+  </fieldset>
+  <div class="close-row"><button type="button" class="primary" data-close>Done</button></div>
+</dialog>
+
+<!-- ======== Game over ======== -->
+<dialog id="end-dlg" aria-labelledby="end-h">
+  <h2 id="end-h"></h2>
+  <p id="end-text"></p>
+  <ol class="end-board" id="end-board" aria-hidden="true"></ol>
+  <div class="close-row">
+    <button type="button" data-close>Close</button>
+    <button type="button" class="primary" id="play-again">Play again</button>
+  </div>
+</dialog>
+
+<!-- ======== Confirm give up ======== -->
+<dialog id="giveup-dlg" aria-labelledby="giveup-h">
+  <h2 id="giveup-h">See the answer?</h2>
+  <p>That's completely fine. This will end the game and show you the word.</p>
+  <div class="close-row">
+    <button type="button" data-close>Keep playing</button>
+    <button type="button" class="primary" id="giveup-yes">Yes, show me the word</button>
+  </div>
+</dialog>
+
+<!-- ======== Confirm new player ======== -->
+<dialog id="reset-dlg" aria-labelledby="reset-h">
+  <h2 id="reset-h">Start fresh for a new player?</h2>
+  <p>This clears the conversation, the board, the notebook and display settings on this device, and starts a new game.</p>
+  <div class="close-row">
+    <button type="button" data-close>Cancel</button>
+    <button type="button" class="primary" id="reset-yes">Yes, start fresh</button>
+  </div>
+</dialog>
+
+<script>
+(() => {
+  "use strict";
+  const LEN = 5;
+  const STATES = {
+    correct: { icon: "✓", word: "Right",   long: "Right letter, right spot" },
+    present: { icon: "●", word: "In word", long: "In the word, but in a different spot" },
+    absent:  { icon: "✕", word: "Not in",  long: "Not in the word" },
+  };
+  const POS = ["first", "second", "third", "fourth", "fifth"];
+  const $ = (id) => document.getElementById(id);
+
+  // ---------- Saved settings (wrapped: storage can be blocked) ----------
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem("rwg." + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+    set(k, v) { try { localStorage.setItem("rwg." + k, JSON.stringify(v)); } catch { /* ignore */ } },
+  };
+  const DEFAULT_SERVER = location.protocol.startsWith("http") && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname)
+    ? location.origin : "http://localhost:5005";
+  const settings = Object.assign(
+    { style: "standard", size: "normal", layout: "qwerty", read: false, motion: false, voice: true,
+      server: DEFAULT_SERVER },
+    store.get("settings", {})
+  );
+  try {
+    const fromLink = new URLSearchParams(location.search).get("server");
+    if (fromLink && /^https?:\/\//.test(fromLink)) settings.server = fromLink.replace(/\/+$/, "");
+  } catch { /* ignore */ }
+  if (!store.get("sizeDefaultFixed", false)) {
+    if (settings.size === "large") settings.size = "normal";
+    store.set("sizeDefaultFixed", true);
+  }
+  // Anonymous random id so Rasa can keep this player's game. No personal data.
+  let sender = store.get("sender", null);
+  if (!sender) {
+    sender = "player-" + (crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2));
+    store.set("sender", sender);
+  }
+
+  const game = { board: store.get("board", null), lastText: "", busy: false, activeTile: null };
+
+  // ---------- Small helpers ----------
+  function el(tag, attrs = {}, ...kids) {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === "class") n.className = v;
+      else if (k === "text") n.textContent = v;
+      else n.setAttribute(k, v);
+    }
+    kids.forEach((c) => n.append(c));
+    return n;
+  }
+  function tile(letter, state, extra = {}) {
+    const t = el(extra.button ? "button" : "span", { class: "tile" + (state ? " " + state : "") });
+    if (extra.button) t.type = "button";
+    t.append(el("span", { class: "l", text: letter || "" }));
+    if (state) {
+      const s = el("span", { class: "s", "aria-hidden": "true" });
+      s.append(el("span", { text: STATES[state].icon }), el("span", { text: STATES[state].word }));
+      t.append(s);
+    }
+    return t;
+  }
+
+  // ---------- Settings ----------
+  function applySettings() {
+    const root = document.documentElement;
+    root.dataset.style = settings.style;
+    root.dataset.size = settings.size;
+    root.dataset.motion = settings.motion ? "reduce" : "full";
+    store.set("settings", settings);
+    renderKeyboard();
+  }
+  function bindSettings() {
+    document.querySelectorAll('#settings-dlg input[type="radio"]').forEach((r) => {
+      r.checked = settings[r.name] === r.value;
+      r.addEventListener("change", () => { settings[r.name] = r.value; applySettings(); });
+    });
+    $("opt-read").checked = settings.read;
+    $("opt-read").addEventListener("change", (e) => {
+      settings.read = e.target.checked; applySettings();
+      if (!settings.read) stopSpeaking();
+    });
+    $("opt-motion").checked = settings.motion;
+    $("opt-motion").addEventListener("change", (e) => { settings.motion = e.target.checked; applySettings(); });
+    $("opt-server").value = settings.server;
+    $("opt-server").addEventListener("change", (e) => {
+      settings.server = e.target.value.trim().replace(/\/+$/, "") || DEFAULT_SERVER; applySettings();
+    });
+  }
+  function setReadAloud(on) {
+    settings.read = on;
+    $("opt-read").checked = on;
+    applySettings();
+    if (!on) stopSpeaking();
+    const msg = on ? "Read aloud is on. I'll read my messages out loud." : "Read aloud is off.";
+    addLog("note", msg);
+    setStatus(msg);
+    speak(msg);
+  }
+  const voice = { on: false };
+  function showVoiceMode(on) {
+    voice.on = on;
+    $("voice-btn").setAttribute("aria-pressed", String(on));
+    $("voice-btn").textContent = on ? "🎙️ Voice mode: On" : "🎙️ Voice mode: Off";
+  }
+  function setVoiceMode(on) {
+    showVoiceMode(on);
+    settings.voice = on;
+    store.set("settings", settings);
+    stopSpeaking();
+    if (rec) rec.cancel();
+    const msg = on
+      ? "Voice mode is on. I'll read my replies, then listen for you. Say a word, or ask me anything."
+      : "Voice mode is off.";
+    addLog("note", msg);
+    setStatus(msg);
+    if (on) speak(msg);
+  }
+  function resumeListening() {
+    if (!voice.on) return;
+    setTimeout(() => { if (voice.on && !rec && !voiceAudio) listen($("ask-mic-btn")); }, 250);
+  }
+
+  // ---------- Legend ----------
+  function renderLegend(target) {
+    const ul = $(target);
+    ul.replaceChildren();
+    for (const [key, s] of Object.entries(STATES)) {
+      const ex = { correct: "A", present: "B", absent: "C" }[key];
+      const t = tile(ex, key);
+      t.setAttribute("aria-hidden", "true");
+      ul.append(el("li", {}, t, el("span", {}, el("b", { text: s.icon + " " + s.word + ": " }), s.long.toLowerCase())));
+    }
+  }
+
+  // ---------- Board ----------
+  function currentLetters() {
+    return $("guess-input").value.replace(/[^a-z]/gi, "").toUpperCase();
+  }
+  function renderBoard({ fresh = false } = {}) {
+    const b = game.board;
+    const max = b ? b.max_guesses : 6;
+    const rows = b ? b.rows : [];
+    const playing = !b || b.status === "playing";
+    const boardEl = $("board");
+    boardEl.replaceChildren();
+    document.querySelectorAll(".max-n").forEach((n) => (n.textContent = max));
+
+    for (let i = 0; i < max; i++) {
+      const li = el("li", { class: "row" + (i === rows.length && playing ? " current" : "") });
+      li.append(el("span", { class: "num", "aria-hidden": "true", text: i + 1 }));
+      if (i < rows.length) {
+        const r = rows[i];
+        const said = [...r.word].map((c, j) => `${c} ${STATES[r.states[j]].word.toLowerCase()}`).join(", ");
+        li.append(el("span", { class: "sr-only", text: `Guess ${i + 1}, ${r.word}: ${said}.` }));
+        [...r.word].forEach((c, j) => {
+          const t = tile(c, r.states[j], { button: true });
+          t.dataset.row = i; t.dataset.col = j; t.tabIndex = -1;
+          t.setAttribute("aria-label", `${c}, ${POS[j]} letter of guess ${i + 1}: ${STATES[r.states[j]].long}. Select to hear why.`);
+          li.append(t);
+        });
+        if (fresh && i === rows.length - 1) li.classList.add("fresh");
+      } else {
+        li.setAttribute("aria-hidden", "true");
+        const typed = i === rows.length && playing ? currentLetters() : "";
+        for (let j = 0; j < LEN; j++) {
+          const t = tile(typed[j] || "", null);
+          if (typed[j]) t.classList.add("typed");
+          li.append(t);
+        }
+      }
+      boardEl.append(li);
+    }
+    // Roving focus: one Tab stop for the whole board, arrows move inside it.
+    const tiles = boardEl.querySelectorAll("button.tile");
+    if (tiles.length) {
+      const keep = game.activeTile && boardEl.querySelector(`button.tile[data-row="${game.activeTile[0]}"][data-col="${game.activeTile[1]}"]`);
+      (keep || boardEl.querySelector(`button.tile[data-row="${rows.length - 1}"]`)).tabIndex = 0;
+    }
+
+    $("left").textContent = b
+      ? (playing ? `Guesses left: ${b.guesses_left} of ${max}` : `Game over. You used ${rows.length} of ${max} guesses.`)
+      : "";
+    $("giveup-btn").disabled = !b || !playing;
+    renderKeyboard();
+  }
+
+  function explainTile(r, c) {
+    const row = game.board.rows[r];
+    const L = row.word[c], st = row.states[c], spot = POS[c];
+    let msg;
+    if (st === "correct") {
+      msg = `${L} is in the word, and it is in the right spot: the ${spot} letter.`;
+    } else if (st === "present") {
+      msg = `${L} is in the word, but not as the ${spot} letter. Try it in a different spot.`;
+    } else {
+      const others = [...row.word].map((x, j) => (x === L && j !== c && row.states[j] !== "absent" ? j : -1)).filter((j) => j >= 0);
+      msg = others.length
+        ? `This ${L} is marked not in the word because the word has only ${others.length === 1 ? "one" : others.length} ${L}, ` +
+          `and it is already counted at the ${others.map((j) => POS[j]).join(" and ")} letter.`
+        : `${L} is not anywhere in the word. You can skip it in your next guesses.`;
+    }
+    $("explain").textContent = msg;
+    speak(msg);
+  }
+
+  function boardKeys(e) {
+    const t = e.target.closest("button.tile");
+    if (!t) return;
+    const r = +t.dataset.row, c = +t.dataset.col;
+    const moves = { ArrowLeft: [0, -1], ArrowRight: [0, 1], ArrowUp: [-1, 0], ArrowDown: [1, 0] };
+    if (moves[e.key]) {
+      e.preventDefault();
+      const n = $("board").querySelector(`button.tile[data-row="${r + moves[e.key][0]}"][data-col="${c + moves[e.key][1]}"]`);
+      if (n) { t.tabIndex = -1; n.tabIndex = 0; n.focus(); game.activeTile = [r + moves[e.key][0], c + moves[e.key][1]]; }
+    }
+  }
+
+  // ---------- On-screen keyboard ----------
+  function renderKeyboard() {
+    const kb = $("keyboard");
+    const abc = settings.layout === "abc";
+    kb.classList.toggle("abc", abc);
+    const rows = abc ? ["ABCDEFG", "HIJKLMN", "OPQRSTU", "VWXYZ"] : ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
+    const states = (game.board && game.board.keyboard) || {};
+    kb.replaceChildren();
+    rows.forEach((letters, i) => {
+      const row = el("div", { class: "krow" });
+      if (i === rows.length - 1) row.append(keyBtn("Enter", "Guess", "wide"));
+      for (const ch of letters) {
+        const st = states[ch.toLowerCase()];
+        const b = keyBtn(ch, ch, st || "");
+        if (st) {
+          b.append(el("span", { class: "s", "aria-hidden": "true", text: STATES[st].icon }));
+          b.setAttribute("aria-label", `${ch}, ${STATES[st].long.toLowerCase()}`);
+        }
+        row.append(b);
+      }
+      if (i === rows.length - 1) {
+        const del = keyBtn("Backspace", "⌫ Delete", "wide");
+        del.setAttribute("aria-label", "Delete last letter");
+        row.append(del);
+      }
+      kb.append(row);
+    });
+  }
+  function keyBtn(key, label, cls) {
+    const b = el("button", { type: "button", class: "key " + cls, "data-key": key });
+    b.append(el("span", { text: label }));
+    return b;
+  }
+  function pressKey(key) {
+    const input = $("guess-input");
+    if (key === "Enter") return submitGuess();
+    if (key === "Backspace") input.value = input.value.slice(0, -1);
+    else if (/^[a-z]$/i.test(key) && currentLetters().length < LEN) input.value += key.toUpperCase();
+    onTyping();
+  }
+  function onTyping() {
+    const input = $("guess-input");
+    const clean = currentLetters().slice(0, LEN);
+    if (input.value !== clean) input.value = clean;
+    const n = clean.length;
+    $("counter").textContent = `${n} of ${LEN} letters`;
+    renderBoard();
+  }
+
+  // ---------- Talking to Rasa ----------
+  async function send(text, { echo = true } = {}) {
+    if (game.busy) return null;
+    game.busy = true;
+    document.body.setAttribute("aria-busy", "true");
+    if (echo) addLog("you", text);
+    try {
+      const res = await fetch(settings.server + "/webhooks/rest/webhook", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sender, message: text }),
+      });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const msgs = await res.json();
+      return handleReplies(msgs);
+    } catch (err) {
+      console.error(err);
+      setStatus("Sorry, I can't reach the game right now. Please ask a helper to check that the game server is running.", true);
+      addLog("note", `Could not reach ${settings.server}. Start it with: rasa run --cors "*"`);
+      if (voice.on) setVoiceMode(false);
+      return null;
+    } finally {
+      game.busy = false;
+      document.body.removeAttribute("aria-busy");
+    }
+  }
+
+  function handleReplies(msgs) {
+    const texts = [];
+    let board = null;
+    for (const m of msgs) {
+      if (m.text) { texts.push(m.text); addLog("lexi", m.text, m.buttons); }
+      if (m.custom && m.custom.type === "wordle_board") board = m.custom;
+    }
+    const before = game.board ? game.board.rows.length : -1;
+    const wasPlaying = !game.board || game.board.status === "playing";
+    if (board) {
+      const newGame = board.rows.length === 0;
+      game.board = board;
+      store.set("board", board);
+      if (newGame) {
+        game.activeTile = null; $("explain").textContent = ""; $("guess-input").value = ""; onTyping();
+        if ($("end-dlg").open) $("end-dlg").close();
+      }
+      renderBoard({ fresh: board.rows.length > before });
+      if (board.status !== "playing" && wasPlaying) showEnd(board);
+    }
+    if (texts.length) {
+      setStatus(texts.join("\n\n"));
+      speak(texts.join(". "));
+    } else resumeListening();
+    return { counted: board && board.rows.length > before, newGame: board && board.rows.length === 0 };
+  }
+
+  function showEnd(b) {
+    const won = b.status === "won";
+    $("end-h").textContent = won ? `🎉 You found ${b.answer}!` : `The word was ${b.answer}`;
+    $("end-text").textContent = won
+      ? `Solved in ${b.rows.length} of ${b.max_guesses} guesses. Well done!`
+      : "That was a tricky one. Want to try another?";
+    $("end-board").replaceChildren(...b.rows.map((r) => {
+      const li = el("li", { class: "row" });
+      [...r.word].forEach((c, j) => li.append(tile(c, r.states[j])));
+      return li;
+    }));
+    openDialog("end-dlg");
+    $("play-again").focus();
+  }
+
+  let toastTimer = null;
+  function toast(text, isError = false) {
+    const t = $("toast");
+    const first = (text.split(/(?<=[.!?])\s|\n/)[0] || text).trim();
+    t.textContent = first.length > 90 ? first.slice(0, 87) + "…" : first;
+    t.classList.toggle("error", isError);
+    t.classList.remove("fading");
+    t.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      t.classList.add("fading");
+      toastTimer = setTimeout(() => { t.hidden = true; }, 450);
+    }, 5000);
+  }
+
+  function setStatus(text, isError = false) {
+    game.lastText = text;
+    const s = $("status");
+    s.textContent = text;
+    s.classList.toggle("error", isError);
+    if (isError) toast(text, true);
+  }
+
+  const history = store.get("log", []);
+  function addLog(who, text, buttons) {
+    history.push({ who, text });
+    while (history.length > 60) history.shift();
+    store.set("log", history);
+    drawLogItem(who, text, buttons);
+  }
+  function drawLogItem(who, text, buttons) {
+    const names = { you: "You", lexi: "Lexi", note: "Note" };
+    const li = el("li", { class: who }, el("span", { class: "who", text: names[who] }), text);
+    if (buttons && buttons.length) {
+      const row = el("div", { class: "actions" });
+      row.style.marginTop = ".5rem";
+      buttons.forEach((b) => {
+        const btn = el("button", { type: "button", text: b.title });
+        btn.addEventListener("click", () => {
+          if (b.payload === "client:voice_mode_on") setVoiceMode(true);
+          else if (b.payload === "client:voice_mode_off") setVoiceMode(false);
+          else if (b.payload === "client:read_aloud_on") setReadAloud(true);
+          else if (b.payload === "client:read_aloud_off") setReadAloud(false);
+          else send(b.payload);
+        });
+        row.append(btn);
+      });
+      li.append(row);
+    }
+    $("log").append(li);
+    $("log").scrollTop = $("log").scrollHeight;
+  }
+
+  // ---------- Guessing ----------
+  async function submitGuess() {
+    const input = $("guess-input");
+    const text = currentLetters().slice(0, LEN);
+    if (!text) {
+      setStatus("Please type a 5-letter word first. Nothing was counted.");
+      toast(game.lastText);
+      input.focus();
+      return;
+    }
+    const result = await send(text);
+    if (result && result.counted) {
+      input.value = "";
+      onTyping();
+    } else if (result && !result.newGame) {
+      toast(game.lastText);
+    }
+    if (!(game.board && game.board.status !== "playing")) input.focus();
+  }
+
+  // ---------- Speech: read aloud + voice input (browser built-ins) ----------
+  let voiceAudio = null;
+  let speakToken = 0;
+  function stopSpeaking() {
+    speakToken++;
+    if (voiceAudio) { voiceAudio.pause(); voiceAudio.removeAttribute("src"); voiceAudio.load(); voiceAudio = null; }
+  }
+  function speak(text) {
+    if (!(settings.read || voice.on) || !text) { resumeListening(); return; }
+    if (voice.on && rec) rec.cancel();
+    stopSpeaking();
+    const token = speakToken;
+    const clean = text.replace(/[✓●✕🎉👋🎤🔊🔇]/g, "").replace(/^\s*-\s*/gm, "").replace(/\n+/g, ". ").slice(0, 2000);
+    const fail = () => {
+      if (token !== speakToken) return;
+      voiceAudio = null;
+      setStatus("I couldn't read that out loud right now. The text is still on screen.", true);
+      resumeListening();
+    };
+    voiceAudio = new Audio(settings.server + "/webhooks/deepgram/speak?text=" + encodeURIComponent(clean));
+    voiceAudio.playbackRate = 0.95;
+    voiceAudio.addEventListener("error", fail);
+    voiceAudio.addEventListener("ended", () => { if (token === speakToken) { voiceAudio = null; resumeListening(); } });
+    voiceAudio.play().catch((e) => {
+      if (e.name === "AbortError" || token !== speakToken) return;
+      if (e.name === "NotAllowedError") { voiceAudio = null; waitForFirstPress(text); }
+      else fail();
+    });
+  }
+
+  let pendingSpeech = null;
+  function waitForFirstPress(text) {
+    if (pendingSpeech === null) {
+      addLog("note", "Your browser needs one press first. Click anywhere or press any key, and Lexi will start talking.");
+      const go = () => {
+        document.removeEventListener("pointerdown", go, true);
+        document.removeEventListener("keydown", go, true);
+        const t = pendingSpeech; pendingSpeech = null;
+        if (t) speak(t);
+      };
+      document.addEventListener("pointerdown", go, true);
+      document.addEventListener("keydown", go, true);
+    }
+    pendingSpeech = text;
+  }
+
+  let rec = null;
+  function setupVoice() {
+    if (!navigator.mediaDevices || !window.MediaRecorder) {
+      $("voice-note").textContent = "Speaking to Lexi needs microphone access, which this browser doesn't offer.";
+      return;
+    }
+    $("voice-note").textContent = "Press Speak, then say a word or spell it, like C, R, A, N, E. Lexi stops listening when you pause. Voice mode (top of the page) keeps talking and listening for you.";
+    $("voice-btn").hidden = false;
+    showVoiceMode(settings.voice);
+    const mic = $("ask-mic-btn");
+    mic.hidden = false;
+    mic.addEventListener("click", () => listen(mic));
+  }
+  async function listen(mic) {
+    if (rec) { rec.finish(); return; }
+    stopSpeaking();
+    let stream;
+    try { stream = await navigator.mediaDevices.getUserMedia({ audio: true }); }
+    catch {
+      setStatus("I couldn't use the microphone. You can type instead.", true);
+      if (voice.on) setVoiceMode(false);
+      return;
+    }
+
+    const chunks = [];
+    const recorder = new MediaRecorder(stream);
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const analyser = ctx.createAnalyser();
+    ctx.createMediaStreamSource(stream).connect(analyser);
+    const buf = new Uint8Array(analyser.fftSize);
+    const startedAt = performance.now();
+    let heard = false, quietSince = performance.now(), timer = null;
+
+    const reset = () => {
+      if (rec !== mine) return;
+      rec = null; mic.setAttribute("aria-pressed", "false"); mic.textContent = "🎤 Speak";
+    };
+    let cancelled = false;
+    const mine = rec = {
+      finish() { if (recorder.state !== "inactive") recorder.stop(); },
+      cancel() { cancelled = true; this.finish(); },
+    };
+    mic.setAttribute("aria-pressed", "true");
+    mic.textContent = "● Listening… press to stop";
+
+    timer = setInterval(() => {
+      analyser.getByteTimeDomainData(buf);
+      let peak = 0;
+      for (const v of buf) peak = Math.max(peak, Math.abs(v - 128));
+      const now = performance.now();
+      if (peak > 12) { heard = true; quietSince = now; }
+      if ((heard && now - quietSince > 1200) || now - startedAt > 15000) rec && rec.finish();
+    }, 100);
+
+    recorder.ondataavailable = (e) => e.data.size && chunks.push(e.data);
+    recorder.onstop = async () => {
+      clearInterval(timer);
+      stream.getTracks().forEach((t) => t.stop());
+      ctx.close();
+      if (cancelled) { reset(); return; }
+      mic.textContent = "… Working it out";
+      try {
+        if (!heard) {
+          if (voice.on) { reset(); resumeListening(); }
+          else setStatus("I didn't hear anything. Press Speak and try again.");
+          return;
+        }
+        const audio = new Blob(chunks, { type: recorder.mimeType || "audio/webm" });
+        const r = await fetch(settings.server + "/webhooks/deepgram/listen", {
+          method: "POST", headers: { "Content-Type": audio.type }, body: audio,
+        });
+        if (!r.ok) throw new Error(r.status);
+        let said = ((await r.json()).transcript || "").trim().replace(/[.!?]+$/, "");
+        if (!said) {
+          setStatus("Sorry, I couldn't make that out. Please try again, or type instead.");
+          if (voice.on) { reset(); resumeListening(); }
+          return;
+        }
+        // "C. R. A. N. E." or "c r a n e" -> "crane"
+        if (/^([a-z][\s.,-]*){2,}$/i.test(said) && said.split(/[\s.,-]+/).filter(Boolean).every((p) => p.length === 1))
+          said = said.replace(/[^a-z]/gi, "");
+        const playing = game.board && game.board.status === "playing";
+        const looksLikeGuess = playing && /^[a-z]{5}$/i.test(said);
+        reset();
+        if (looksLikeGuess) { $("guess-input").value = said.toUpperCase(); onTyping(); await submitGuess(); }
+        else await send(said); // e.g. "I give up", "how do I play"
+      } catch {
+        setStatus("I couldn't reach the voice service. You can type instead.", true);
+        if (voice.on) setVoiceMode(false);
+      } finally {
+        reset();
+      }
+    };
+    recorder.start();
+  }
+
+  // ---------- Wire up ----------
+  function openDialog(id) { const d = $(id); d.showModal(); }
+  document.querySelectorAll("dialog").forEach((d) =>
+    d.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", () => d.close())));
+  $("voice-btn").addEventListener("click", () => setVoiceMode(!voice.on));
+  $("help-btn").addEventListener("click", () => openDialog("help-dlg"));
+  $("settings-btn").addEventListener("click", () => openDialog("settings-dlg"));
+  $("giveup-btn").addEventListener("click", () => openDialog("giveup-dlg"));
+  $("giveup-yes").addEventListener("click", () => { $("giveup-dlg").close(); send("I give up"); });
+  $("new-btn").addEventListener("click", () => send("new game"));
+  // New player: wipe this device's saved state (keeping only the server
+  // address) and reload. A new anonymous id means Rasa starts a new session.
+  $("reset-btn").addEventListener("click", () => openDialog("reset-dlg"));
+  $("reset-yes").addEventListener("click", () => {
+    const server = settings.server;
+    try {
+      Object.keys(localStorage).filter((k) => k.startsWith("rwg.")).forEach((k) => localStorage.removeItem(k));
+    } catch { /* storage blocked: the reload still gives a clean page */ }
+    store.set("settings", { server });
+    stopSpeaking();
+    location.reload();
+  });
+  $("play-again").addEventListener("click", async () => {
+    $("end-dlg").close();
+    await send("new game");
+    $("guess-input").focus();
+  });
+  $("toast").addEventListener("click", () => { clearTimeout(toastTimer); $("toast").hidden = true; });
+  $("repeat-btn").addEventListener("click", () => {
+    const keep = settings.read; settings.read = true; speak(game.lastText); settings.read = keep;
+    $("status").textContent = ""; requestAnimationFrame(() => ($("status").textContent = game.lastText));
+  });
+
+  $("guess-form").addEventListener("submit", (e) => { e.preventDefault(); submitGuess(); });
+  $("guess-input").addEventListener("input", onTyping);
+  $("keyboard").addEventListener("click", (e) => {
+    const k = e.target.closest(".key");
+    if (k) pressKey(k.dataset.key);
+  });
+  $("board").addEventListener("click", (e) => {
+    const t = e.target.closest("button.tile");
+    if (!t) return;
+    game.activeTile = [+t.dataset.row, +t.dataset.col];
+    $("board").querySelectorAll("button.tile").forEach((x) => (x.tabIndex = -1));
+    t.tabIndex = 0;
+    explainTile(+t.dataset.row, +t.dataset.col);
+  });
+  $("board").addEventListener("keydown", boardKeys);
+
+  // Typing anywhere (outside text boxes and dialogs) goes to the guess.
+  document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey || e.metaKey || e.altKey || document.querySelector("dialog[open]")) return;
+    const tag = (e.target.tagName || "").toLowerCase();
+    if (tag === "input" || tag === "textarea") return;
+    if (/^[a-z]$/i.test(e.key)) { e.preventDefault(); pressKey(e.key); }
+    else if (e.key === "Backspace") { e.preventDefault(); pressKey("Backspace"); }
+    else if (e.key === "Enter" && tag !== "button") { e.preventDefault(); submitGuess(); }
+  });
+
+  $("ask-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const v = $("ask-input").value.trim();
+    if (!v) return;
+    $("ask-input").value = "";
+    send(v);
+  });
+
+  $("notebook").value = store.get("notebook", "");
+  $("notebook").addEventListener("input", (e) => store.set("notebook", e.target.value));
+  $("note-clear").addEventListener("click", () => { $("notebook").value = ""; store.set("notebook", ""); $("notebook").focus(); });
+
+  // ---------- Start ----------
+  bindSettings();
+  applySettings();
+  renderLegend("help-legend");
+  // First visit on this device (or after "New player"): show How to play once.
+  // It can always be opened again with the Help button.
+  if (!store.get("introSeen", false)) {
+    $("help-dlg").addEventListener("close", () => { store.set("introSeen", true); $("guess-input").focus(); }, { once: true });
+    openDialog("help-dlg");
+  }
+  history.forEach((h) => drawLogItem(h.who, h.text));
+  setupVoice();
+  renderBoard();
+  if (game.board && game.board.status === "playing") {
+    setStatus("Welcome back! Your game is just as you left it. Type or say your next guess when you're ready.");
+    speak(game.lastText);
+  } else if (!game.board) {
+    send("new game", { echo: false });
+  } else {
+    setStatus("Welcome back! Press Play again, or say new game, to start a new game.");
+    speak(game.lastText);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,7 +1,6 @@
 version: "3.1"
 
 responses:
+  # Not rephrased: the rephraser once invented a game result here.
   utter_hello:
-    - text: "Hi there! Nice to meet you!"
-      metadata:
-        rephrase: True
+    - text: "Hi there! Nice to meet you! Say \"new game\" whenever you'd like to play."

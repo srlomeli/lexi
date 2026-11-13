@@ -1,6 +1,10 @@
 flows:
   hello:
-    description: Flow for greeting the user hello
+    description: >
+      Greet the user when they say hello and no Wordle game is going on.
+      During a game, "hello" is a 5-letter guess, not a greeting.
     name: hello
+    # During a game, greetings like "hello" are real 5-letter guesses.
+    if: not slots.wordle_active
     steps:
       - action: utter_hello
