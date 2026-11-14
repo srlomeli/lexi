@@ -8,7 +8,7 @@ AI 380: Human-AI Interaction, HW3: Wordle for Everyone (Fall 2026).
 
 ## Play the game
 
-**Live link:** _add the deployed link here_
+**Live link:** [lexi.salvadorlomeli.com](https://lexi.salvadorlomeli.com/)
 
 Open the link in Chrome, Edge, or Safari. A new game starts by itself.
 
@@ -128,7 +128,7 @@ player ID. Spoken guesses are turned into text by the browser and are not record
 - The letter-scoring logic is adapted from my earlier Wordle assignment,
   written with Sam from the QUAD.
 - Common-word frequencies come from the [wordfreq](https://pypi.org/project/wordfreq/) library.
-- Claude (Claude Code) helped restructure the game rules and wrote the Rasa
+- Claude (Claude Code) helped restructure the game rules and helped write some of the Rasa
   custom actions, the curation script, and the web page. Each file's header
-  notes what it contributed.
+  notes where AI was used for assistance.
 - Built with [Rasa Pro](https://rasa.com/docs/pro/) and Google Gemini.

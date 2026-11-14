@@ -1,7 +1,7 @@
 ########################################
 # Name: Salvador Lomeli
 # Course: AI 380 Human-AI Interaction - HW3: Wordle for Everyone
-# GenAI: Claude (Claude Code) wrote these Rasa custom actions.
+# GenAI: Claude (Claude Code) helped write some of these Rasa custom actions.
 # Description: Connects Rasa to the game rules in game/wordle.py.
 #   The LLM only works out WHAT the player said (e.g. "is it crane?").
 #   Everything else - picking the answer, checking and scoring guesses,

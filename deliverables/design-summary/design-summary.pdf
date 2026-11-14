@@ -1,0 +1,334 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Length 14330 >>
+stream
+0.102 0.310 0.839 rg BT /F2 16 Tf 1 0 0 1 38.00 754.00 Tm (Lexi's Word Game: Design Summary) Tj ET
+0.20 0.20 0.20 rg BT /F2 9.2 Tf 1 0 0 1 452.00 757.00 Tm (Salvador Lomeli Rodriguez) Tj ET
+0.29 0.29 0.29 rg BT /F1 8.8 Tf 1 0 0 1 38.00 742.00 Tm (Accessible Wordle for Older Adults \267 https://lexi.salvadorlomeli.com) Tj ET
+0.29 0.29 0.29 rg BT /F1 8.8 Tf 1 0 0 1 390.00 742.00 Tm (AI 380: Human-AI Interaction \267 HW3 \267 Fall 2026) Tj ET
+0.102 0.310 0.839 RG 1.6 w 38.00 736.00 m 574.00 736.00 l S
+0.102 0.310 0.839 rg BT /F2 11.4 Tf 1 0 0 1 38.00 722.00 Tm (1. Design Concepts) Tj ET
+0.80 0.84 0.88 RG 0.9 w 38.00 718.50 m 574.00 718.50 l S
+0.12 0.12 0.12 rg BT /F2 9.6 Tf 1 0 0 1 38.00 707.50 Tm (Target Players and Barriers in Standard Wordle) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 38.00 698.00 Tm /F2 8.65 Tf (Lexi's Word Game) Tj /F1 8.65 Tf ( is a relaxing, accessible Wordle-style word puzzle designed for older adults \(age 60+\). While New York Times \(NYT\)) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 38.00 686.90 Tm /F1 8.65 Tf (Wordle is a widely enjoyed daily ritual, its interface assumes perceptual, motor, and cognitive baselines that create friction or exclusion for) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 38.00 675.80 Tm /F1 8.65 Tf (many older players \(W3C WCAG 2.1; National Institute on Aging; Nielsen Norman Group, ) Tj /F3 8.65 Tf (Usability for Senior Citizens) Tj /F1 8.65 Tf (\):) Tj ET
+0.933 0.953 1.000 rg 0.45 0.45 0.45 RG 0.7 w 38.00 651.50 536.00 16.60 re B
+BT 0.080 0.080 0.080 rg 1 0 0 1 42.50 657.80 Tm /F2 8.10 Tf (NYT Wordle Barrier) Tj ET
+BT 0.080 0.080 0.080 rg 1 0 0 1 160.50 657.80 Tm /F2 8.10 Tf (Impact on Older Adults) Tj ET
+BT 0.080 0.080 0.080 rg 1 0 0 1 310.50 657.80 Tm /F2 8.10 Tf (How Lexi's Word Game Removes It) Tj ET
+1 1 1 rg 0.55 0.55 0.55 RG 0.6 w 38.00 604.30 536.00 47.20 re B
+BT 0.100 0.100 0.100 rg 1 0 0 1 42.50 641.20 Tm /F2 8.10 Tf (Color-only tile feedback) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 42.50 631.00 Tm /F1 8.10 Tf (\(green, yellow, gray\)) Tj ET
+0.65 0.65 0.65 RG 0.5 w 156.00 651.50 m 156.00 604.30 l S
+BT 0.100 0.100 0.100 rg 1 0 0 1 160.50 641.20 Tm /F1 8.10 Tf (Age-related lens yellowing and) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 160.50 631.00 Tm /F1 8.10 Tf (color-vision deficiencies make hues) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 160.50 620.80 Tm /F1 8.10 Tf (hard to tell apart.) Tj ET
+0.65 0.65 0.65 RG 0.5 w 306.00 651.50 m 306.00 604.30 l S
+BT 0.100 0.100 0.100 rg 1 0 0 1 310.50 641.20 Tm /F1 8.10 Tf (Every scored tile pairs color with a ) Tj /F2 8.10 Tf (symbol) Tj /F1 8.10 Tf ( \([check], [dot], [x]\), a) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 310.50 631.00 Tm /F2 8.10 Tf (plain-English label) Tj /F1 8.10 Tf ( \(Right, In word, Not in\), a ) Tj /F2 8.10 Tf (distinct border) Tj /F1 8.10 Tf ( \(solid,) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 310.50 620.80 Tm /F1 8.10 Tf (dashed, dotted\), strikethrough on absent letters, and a zero-hue) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 310.50 610.60 Tm /F1 8.10 Tf (monochrome mode.) Tj ET
+1 1 1 rg 0.55 0.55 0.55 RG 0.6 w 38.00 567.30 536.00 37.00 re B
+BT 0.100 0.100 0.100 rg 1 0 0 1 42.50 594.00 Tm /F2 8.10 Tf (Small, fixed typography and) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 42.50 583.80 Tm /F2 8.10 Tf (tight keys) Tj ET
+0.65 0.65 0.65 RG 0.5 w 156.00 604.30 m 156.00 567.30 l S
+BT 0.100 0.100 0.100 rg 1 0 0 1 160.50 594.00 Tm /F1 8.10 Tf (Presbyopia, low vision, and mild hand) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 160.50 583.80 Tm /F1 8.10 Tf (tremor make small text and closely) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 160.50 573.60 Tm /F1 8.10 Tf (packed keys tiring or error-prone.) Tj ET
+0.65 0.65 0.65 RG 0.5 w 306.00 604.30 m 306.00 567.30 l S
+BT 0.100 0.100 0.100 rg 1 0 0 1 310.50 594.00 Tm /F1 8.10 Tf (Uses ) Tj /F2 8.10 Tf (Atkinson Hyperlegible) Tj /F1 8.10 Tf ( at 112.5% base size with Large \(1.2x\) and) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 310.50 583.80 Tm /F1 8.10 Tf (Extra large \(1.4x\) settings, fluid rem scaling at 200% zoom, and controls) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 310.50 573.60 Tm /F1 8.10 Tf (>= 44 x 44 px in QWERTY or alphabetical \(A-Z\) order.) Tj ET
+1 1 1 rg 0.55 0.55 0.55 RG 0.6 w 38.00 530.30 536.00 37.00 re B
+BT 0.100 0.100 0.100 rg 1 0 0 1 42.50 557.00 Tm /F2 8.10 Tf (Keyboard/touch-only entry) Tj ET
+0.65 0.65 0.65 RG 0.5 w 156.00 567.30 m 156.00 530.30 l S
+BT 0.100 0.100 0.100 rg 1 0 0 1 160.50 557.00 Tm /F1 8.10 Tf (Arthritis, tremor, or unfamiliarity with) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 160.50 546.80 Tm /F1 8.10 Tf (on-screen keyboards can make typing) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 160.50 536.60 Tm /F1 8.10 Tf (slow or uncomfortable.) Tj ET
+0.65 0.65 0.65 RG 0.5 w 306.00 567.30 m 306.00 530.30 l S
+BT 0.100 0.100 0.100 rg 1 0 0 1 310.50 557.00 Tm /F1 8.10 Tf (Multi-modal input: players can type on a physical keyboard, tap large) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 310.50 546.80 Tm /F1 8.10 Tf (on-screen keys, press ) Tj /F2 8.10 Tf (Speak) Tj /F1 8.10 Tf (, or use hands-free ) Tj /F2 8.10 Tf (Voice mode) Tj /F1 8.10 Tf ( to say a) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 310.50 536.60 Tm /F1 8.10 Tf (word \("crane"\) or spell it out \("C, R, A, N, E"\).) Tj ET
+1 1 1 rg 0.55 0.55 0.55 RG 0.6 w 38.00 483.10 536.00 47.20 re B
+BT 0.100 0.100 0.100 rg 1 0 0 1 42.50 520.00 Tm /F2 8.10 Tf (High working-memory load) Tj ET
+0.65 0.65 0.65 RG 0.5 w 156.00 530.30 m 156.00 483.10 l S
+BT 0.100 0.100 0.100 rg 1 0 0 1 160.50 520.00 Tm /F1 8.10 Tf (Remembering which duplicate letters) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 160.50 509.80 Tm /F1 8.10 Tf (are accounted for or why a tile) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 160.50 499.60 Tm /F1 8.10 Tf (received its state taxes working) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 160.50 489.40 Tm /F1 8.10 Tf (memory.) Tj ET
+0.65 0.65 0.65 RG 0.5 w 306.00 530.30 m 306.00 483.10 l S
+BT 0.100 0.100 0.100 rg 1 0 0 1 310.50 520.00 Tm /F1 8.10 Tf (Selecting any scored tile opens the ) Tj /F2 8.10 Tf ("Why this letter?") Tj /F1 8.10 Tf ( explainer \(in text) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 310.50 509.80 Tm /F1 8.10 Tf (and speech\), alongside a persistent ) Tj /F2 8.10 Tf (Letter notebook) Tj /F1 8.10 Tf ( and full) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 310.50 499.60 Tm /F1 8.10 Tf (conversation log.) Tj ET
+1 1 1 rg 0.55 0.55 0.55 RG 0.6 w 38.00 446.10 536.00 37.00 re B
+BT 0.100 0.100 0.100 rg 1 0 0 1 42.50 472.80 Tm /F2 8.10 Tf (Unforgiving daily format and) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 42.50 462.60 Tm /F2 8.10 Tf (streak pressure) Tj ET
+0.65 0.65 0.65 RG 0.5 w 156.00 483.10 m 156.00 446.10 l S
+BT 0.100 0.100 0.100 rg 1 0 0 1 160.50 472.80 Tm /F1 8.10 Tf (One puzzle a day, win-streak counters,) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 160.50 462.60 Tm /F1 8.10 Tf (and no graceful exit when stuck can) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 160.50 452.40 Tm /F1 8.10 Tf (turn a casual puzzle into a test.) Tj ET
+0.65 0.65 0.65 RG 0.5 w 306.00 483.10 m 306.00 446.10 l S
+BT 0.100 0.100 0.100 rg 1 0 0 1 310.50 472.80 Tm /F1 8.10 Tf (Unlimited games with ) Tj /F2 8.10 Tf (no timers and no streaks) Tj /F1 8.10 Tf (, curated everyday) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 310.50 462.60 Tm /F1 8.10 Tf (answers, zero penalty for unknown or mistyped words, and a gentle ) Tj /F2 8.10 Tf ("I) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 310.50 452.40 Tm /F2 8.10 Tf (give up") Tj /F1 8.10 Tf ( option that kindly reveals the word.) Tj ET
+0.12 0.12 0.12 rg BT /F2 9.6 Tf 1 0 0 1 38.00 436.60 Tm (Core Design Philosophy and AI Boundary) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 38.00 427.10 Tm /F1 8.65 Tf (Lexi is framed as a patient, encouraging companion rather than a judge. Following the ) Tj /F2 8.65 Tf (Microsoft Guidelines for Human-AI Interaction) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 38.00 416.00 Tm /F1 8.65 Tf (\(clear capabilities, graceful error recovery, and appropriate division of control\), the architecture strictly separates ) Tj /F2 8.65 Tf (conversational) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 38.00 404.90 Tm /F2 8.65 Tf (understanding) Tj /F1 8.65 Tf ( from ) Tj /F2 8.65 Tf (deterministic game rules) Tj /F1 8.65 Tf (:) Tj ET
+0.965 0.973 0.980 rg 0.75 0.80 0.86 RG 0.8 w 38.00 341.20 536.00 57.00 re B
+0.12 0.16 0.24 rg BT /F4 7.60 Tf 1 0 0 1 45.00 389.20 Tm (Player \(keyboard, QWERTY/A-Z keys, or mic\) <--> Web Front End \(web/index.html + localStorage rwg.*\)) Tj ET
+0.12 0.16 0.24 rg BT /F4 7.60 Tf 1 0 0 1 45.00 379.40 Tm (  |--> Deepgram Channel \(channels/deepgram_voice.py\): POST /listen \(Nova-3 STT\) & GET /speak \(Aura-2 TTS\)) Tj ET
+0.12 0.16 0.24 rg BT /F4 7.60 Tf 1 0 0 1 45.00 369.60 Tm (  |--> POST /webhooks/rest/webhook --> Rasa Pro \(Gemini 3.1 Flash-Lite: maps intent to flows & wordle_guess\)) Tj ET
+0.12 0.16 0.24 rg BT /F4 7.60 Tf 1 0 0 1 45.00 359.80 Tm (  '--> Custom Actions \(actions/action_wordle.py\) + Pure Python Rules \(game/wordle.py, english.py, answers.txt\)) Tj ET
+0.12 0.16 0.24 rg BT /F4 7.60 Tf 1 0 0 1 45.00 350.00 Tm (       Deterministic answer selection, english.py validation, 2-pass scoring, & SQLite slots \(rasa_tracker.db\)) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 333.20 Tm (\225) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 333.20 Tm /F2 8.65 Tf (Where AI helps: ) Tj /F1 8.65 Tf (Rasa Pro's ) Tj /F4 8.65 Tf (SearchReadyLLMCommandGenerator) Tj /F1 8.65 Tf ( \(powered by ) Tj /F4 8.65 Tf (gemini-3.1-flash-lite) Tj /F1 8.65 Tf ( with automatic retry) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 322.10 Tm /F1 8.65 Tf (routing\) interprets flexible natural language\227such as "my guess is crane", "how do I play?", or "can I talk to you?"\227so players never have) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 311.00 Tm /F1 8.65 Tf (to learn rigid commands.) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 297.30 Tm (\225) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 297.30 Tm /F2 8.65 Tf (Where AI never takes control: ) Tj /F1 8.65 Tf (The language model never chooses the secret word, checks dictionary validity, counts turns, or scores) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 286.20 Tm /F1 8.65 Tf (letters. All game state lives in Rasa ) Tj /F4 8.65 Tf (controlled) Tj /F1 8.65 Tf ( slots \() Tj /F4 8.65 Tf (wordle_answer) Tj /F1 8.65 Tf (, ) Tj /F4 8.65 Tf (wordle_guesses) Tj /F1 8.65 Tf (, ) Tj /F4 8.65 Tf (wordle_active) Tj /F1 8.65 Tf (\) updated exclusively by) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 275.10 Tm /F1 8.65 Tf (deterministic Python in ) Tj /F4 8.65 Tf (actions/action_wordle.py) Tj /F1 8.65 Tf ( and ) Tj /F4 8.65 Tf (game/wordle.py) Tj /F1 8.65 Tf (. In addition, the rephraser prompt \() Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 264.00 Tm /F4 8.65 Tf (prompts/rephraser_demo_personality_prompt.jinja2) Tj /F1 8.65 Tf (\) enforces a strict rule never to invent word validity, letter counts, letter) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 252.90 Tm /F1 8.65 Tf (positions, remaining guesses, or the secret answer.) Tj ET
+0.102 0.310 0.839 rg BT /F2 11.4 Tf 1 0 0 1 38.00 236.20 Tm (2. Core Achievements) Tj ET
+0.80 0.84 0.88 RG 0.9 w 38.00 232.70 m 574.00 232.70 l S
+0.12 0.12 0.12 rg BT /F2 9.6 Tf 1 0 0 1 38.00 221.70 Tm (Core Game Correctness \(G1-G7\)) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 38.00 212.20 Tm /F1 8.65 Tf (All seven core requirements are implemented in ) Tj /F4 8.65 Tf (game/wordle.py) Tj /F1 8.65 Tf (, ) Tj /F4 8.65 Tf (game/curate.py) Tj /F1 8.65 Tf (, and ) Tj /F4 8.65 Tf (actions/action_wordle.py) Tj /F1 8.65 Tf (:) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 198.50 Tm (\225) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 198.50 Tm /F2 8.65 Tf (G1 \227 Hidden five-letter answer at game start: ) Tj /F1 8.65 Tf (wordle.new_answer\(\) selects a random 5-letter word from game/answers.txt when) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 187.40 Tm /F1 8.65 Tf (ActionStartWordle runs. On the web page, a new game starts automatically on first load, and the secret word is omitted from the) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 176.30 Tm /F1 8.65 Tf (wordle_board JSON payload until status changes from "playing" to "won" or "lost".) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 162.60 Tm (\225) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 162.60 Tm /F2 8.65 Tf (G2 \227 Fixed, justified number of guesses: ) Tj /F1 8.65 Tf (MAX_GUESSES = 6. Keeping six guesses preserves familiarity for players who have seen) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 151.50 Tm /F1 8.65 Tf (NYT Wordle with family members, while pairing those six turns with a curated common-word pool, zero penalty for invalid or repeated) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 140.40 Tm /F1 8.65 Tf (guesses, and a no-shame "I give up" button so six tries feel supportive rather than restrictive.) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 126.70 Tm (\225) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 126.70 Tm /F2 8.65 Tf (G3 \227 Validation against english.py: ) Tj /F1 8.65 Tf (ALLOWED precomputes a Python set of all 8,548 five-letter alphabetic words in) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 115.60 Tm /F1 8.65 Tf (ENGLISH_WORDS from game/english.py for O\(1\) lookup while keeping every valid 5-letter word in english.py playable as a guess.) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 101.90 Tm (\225) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 101.90 Tm /F2 8.65 Tf (G4 \227 Forgiving handling of invalid guesses: ) Tj /F1 8.65 Tf (wordle.normalize\(\) strips spaces and hyphens and lowercases input so "C R A N E" and) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 90.80 Tm /F1 8.65 Tf ("crane" work identically. wordle.validate\(\) checks for empty input, non-letter characters, words shorter or longer than 5 letters, and words) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 79.70 Tm /F1 8.65 Tf (not in ALLOWED. score_guess\(\) also catches duplicate guesses already tried in the same game. Invalid or repeated guesses return a) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 68.60 Tm /F1 8.65 Tf (clear, polite explanation, leave wordle_guesses unchanged, keep typed letters in the input box for easy editing, and append a spelling tip) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 57.50 Tm /F1 8.65 Tf (when on a voice channel.) Tj ET
+0.45 0.45 0.45 rg BT /F1 8.5 Tf 1 0 0 1 216.00 20.00 Tm (Lexi's Word Game: Design Summary  \267  Page 1 of 3) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R /F4 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 12805 >>
+stream
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 754.00 Tm (\225) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 754.00 Tm /F2 8.65 Tf (G5 \227 Accurate repeated-letter scoring: ) Tj /F1 8.65 Tf (wordle.score\(guess, answer\) uses a deterministic two-pass algorithm adapted from an earlier) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 742.90 Tm /F1 8.65 Tf (Wordle implementation. Pass 1 marks exact position matches as correct and replaces matched letters in a working copy of answer with) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 731.80 Tm /F1 8.65 Tf ("*". Pass 2 marks non-correct letters as present only if an unmatched copy remains in the working list, crossing off each matched copy) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 720.70 Tm /F1 8.65 Tf (as it is used \(e.g., guessing SPEED against ABIDE marks only the first E as present and the second E as absent\).) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 709.60 Tm /F1 8.65 Tf (wordle.keyboard_state\(\) tracks the highest state seen per letter \(absent < present < correct\) so a key never downgrades once found in) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 698.50 Tm /F1 8.65 Tf (the right spot.) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 684.80 Tm (\225) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 684.80 Tm /F2 8.65 Tf (G6 \227 Clear win/loss message and restart: ) Tj /F1 8.65 Tf (wordle.end_message\(\) announces wins with the answer and guess count and losses gently.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 673.70 Tm /F1 8.65 Tf (The web page also opens a game-over summary modal \(#end-dlg\) with a miniature board recap and a focused Play again button, and) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 662.60 Tm /F1 8.65 Tf (players can restart any time by clicking New game or saying "yes" / "new game".) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 648.90 Tm (\225) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 648.90 Tm /F2 8.65 Tf (G7 \227 Curated answer pool: ) Tj /F1 8.65 Tf (Because english.py contains 8,548 five-letter words\227including obscure terms, inflections, proper nouns, and) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 637.80 Tm /F1 8.65 Tf (slurs\227game/curate.py builds game/answers.txt through a reproducible four-step pipeline \(while keeping all 8,548 words valid as) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 626.70 Tm /F1 8.65 Tf (guesses\):) Tj ET
+0.933 0.953 1.000 rg 0.45 0.45 0.45 RG 0.7 w 38.00 602.40 536.00 16.60 re B
+BT 0.080 0.080 0.080 rg 1 0 0 1 42.50 608.70 Tm /F2 8.10 Tf (Step) Tj ET
+BT 0.080 0.080 0.080 rg 1 0 0 1 84.50 608.70 Tm /F2 8.10 Tf (Filter Applied in game/curate.py) Tj ET
+BT 0.080 0.080 0.080 rg 1 0 0 1 508.50 608.70 Tm /F2 8.10 Tf (Words Left) Tj ET
+1 1 1 rg 0.55 0.55 0.55 RG 0.6 w 38.00 585.80 536.00 16.60 re B
+BT 0.100 0.100 0.100 rg 1 0 0 1 42.50 592.10 Tm /F1 8.10 Tf (1) Tj ET
+0.65 0.65 0.65 RG 0.5 w 80.00 602.40 m 80.00 585.80 l S
+BT 0.100 0.100 0.100 rg 1 0 0 1 84.50 592.10 Tm /F1 8.10 Tf (All 5-letter alphabetic words in english.py \(ALLOWED\)) Tj ET
+0.65 0.65 0.65 RG 0.5 w 504.00 602.40 m 504.00 585.80 l S
+BT 0.100 0.100 0.100 rg 1 0 0 1 508.50 592.10 Tm /F1 8.10 Tf (8,548) Tj ET
+1 1 1 rg 0.55 0.55 0.55 RG 0.6 w 38.00 569.20 536.00 16.60 re B
+BT 0.100 0.100 0.100 rg 1 0 0 1 42.50 575.50 Tm /F1 8.10 Tf (2) Tj ET
+0.65 0.65 0.65 RG 0.5 w 80.00 585.80 m 80.00 569.20 l S
+BT 0.100 0.100 0.100 rg 1 0 0 1 84.50 575.50 Tm /F1 8.10 Tf (Keep common everyday words with wordfreq Zipf frequency >= 3.5 \(~3+ per million words\)) Tj ET
+0.65 0.65 0.65 RG 0.5 w 504.00 585.80 m 504.00 569.20 l S
+BT 0.100 0.100 0.100 rg 1 0 0 1 508.50 575.50 Tm /F1 8.10 Tf (1,740) Tj ET
+1 1 1 rg 0.55 0.55 0.55 RG 0.6 w 38.00 552.60 536.00 16.60 re B
+BT 0.100 0.100 0.100 rg 1 0 0 1 42.50 558.90 Tm /F1 8.10 Tf (3) Tj ET
+0.65 0.65 0.65 RG 0.5 w 80.00 569.20 m 80.00 552.60 l S
+BT 0.100 0.100 0.100 rg 1 0 0 1 84.50 558.90 Tm /F1 8.10 Tf (Drop simple plurals \(-s, -es, -ies\) and past tenses \(-ed, -ied\) whose base word is in english.py) Tj ET
+0.65 0.65 0.65 RG 0.5 w 504.00 569.20 m 504.00 552.60 l S
+BT 0.100 0.100 0.100 rg 1 0 0 1 508.50 558.90 Tm /F1 8.10 Tf (1,248) Tj ET
+1 1 1 rg 0.55 0.55 0.55 RG 0.6 w 38.00 525.80 536.00 26.80 re B
+BT 0.100 0.100 0.100 rg 1 0 0 1 42.50 542.30 Tm /F1 8.10 Tf (4) Tj ET
+0.65 0.65 0.65 RG 0.5 w 80.00 552.60 m 80.00 525.80 l S
+BT 0.100 0.100 0.100 rg 1 0 0 1 84.50 542.30 Tm /F1 8.10 Tf (Remove 105 manually reviewed words in REMOVE: slurs/crude terms, upsetting violent/medical words \(death,) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 84.50 532.10 Tm /F1 8.10 Tf (tumor, abort\), personal/place/brand names, and British spellings/slang) Tj ET
+0.65 0.65 0.65 RG 0.5 w 504.00 552.60 m 504.00 525.80 l S
+BT 0.100 0.100 0.100 rg 1 0 0 1 508.50 542.30 Tm /F2 8.10 Tf (1,143) Tj ET
+0.12 0.12 0.12 rg BT /F2 9.6 Tf 1 0 0 1 38.00 516.30 Tm (Accessible Feedback and Interaction) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 38.00 506.80 Tm /F1 8.65 Tf (The web front end \() Tj /F4 8.65 Tf (web/index.html) Tj /F1 8.65 Tf (, documented in ) Tj /F4 8.65 Tf (web/README.md) Tj /F1 8.65 Tf (\) implements all three accessibility priorities following WCAG 2.1) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 38.00 495.70 Tm /F1 8.65 Tf (Level AA/AAA criteria:) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 482.00 Tm (\225) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 482.00 Tm /F2 8.65 Tf (Perceivable feedback without color: ) Tj /F1 8.65 Tf (Every scored tile shows four redundant cues: \(1\) background fill, \(2\) a distinct symbol \([check],) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 470.90 Tm /F1 8.65 Tf ([dot], [x]\), \(3\) an explicit word label on the tile \(Right, In word, Not in\), and \(4\) a distinct border \(4px solid for Right, 4px dashed for In) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 459.80 Tm /F1 8.65 Tf (word, 3px dotted plus strikethrough letter text for Not in\). Players can switch between Colors, symbols, and words \(standard\), Symbols) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 448.70 Tm /F1 8.65 Tf (and words only \(mono, zero hue\227a built-in grayscale verification\), and High contrast, dark background \(dark\). Across all three themes,) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 437.60 Tm /F1 8.65 Tf (WCAG 2.1 contrast ratios exceed 4.5:1 for all text \(6.17:1-16.48:1 in standard, 9.94:1-18.88:1 in mono, and 8.21:1-21.00:1 in dark\) and) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 426.50 Tm /F1 8.65 Tf (exceed 3:1 for all tile edges, control borders, and focus rings \(4.28:1-21.00:1\). Plain-language summaries from wordle.describe\(\) are) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 415.40 Tm /F1 8.65 Tf (announced via an aria-live="polite" status region \(#status\) and per-row .sr-only labels.) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 401.70 Tm (\225) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 401.70 Tm /F2 8.65 Tf (Operable, forgiving interaction: ) Tj /F1 8.65 Tf (Full keyboard-only play \(type letters anywhere, Backspace to delete, Enter to submit, roving tabIndex) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 390.60 Tm /F1 8.65 Tf (with arrow-key navigation across scored tiles, a 4px solid :focus-visible outline with 3px offset, and a Skip to the guess box link\). All) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 379.50 Tm /F1 8.65 Tf (buttons and keys enforce min-height: 2.75rem; min-width: 2.75rem \(>= 44 x 44 px\). Destructive actions \(I give up and Start fresh for a) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 368.40 Tm /F1 8.65 Tf (new player\) ask for confirmation in a modal dialog.) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 354.70 Tm (\225) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 354.70 Tm /F2 8.65 Tf (Readable, supportive design: ) Tj /F1 8.65 Tf (Uses Atkinson Hyperlegible, fluid rem sizing, and clamp\(\) board dimensions that reflow cleanly at 200%) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 343.60 Tm /F1 8.65 Tf (zoom without horizontal scrolling. Prior guesses remain on the board, the full chat history stays visible with a Repeat last message) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 332.50 Tm /F1 8.65 Tf (button, a How to play dialog with a live tile legend opens automatically on first visit and remains accessible via Help, and all settings) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 321.40 Tm /F1 8.65 Tf (persist in localStorage.) Tj ET
+0.12 0.12 0.12 rg BT /F2 9.6 Tf 1 0 0 1 38.00 306.20 Tm (Enhancements Beyond NYT) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 38.00 296.70 Tm /F1 8.65 Tf (Lexi's Word Game implements ) Tj /F2 8.65 Tf (seven enhancements across Categories A, B, and C) Tj /F1 8.65 Tf ( \(exceeding the requirement of three enhancements) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 38.00 285.60 Tm /F1 8.65 Tf (across two categories\):) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 271.90 Tm (1.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 271.90 Tm /F2 8.65 Tf (Category A \(Cognitive Support\) \227 "Why this letter?" explainer: ) Tj /F1 8.65 Tf (Selecting any scored board tile calls explainTile\(r, c\), which displays) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 260.80 Tm /F1 8.65 Tf (and speaks a plain-language explanation tailored to that exact tile\227explicitly explaining duplicate-letter cases when a second copy of a) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 249.70 Tm /F1 8.65 Tf (letter is marked Not in because the secret word's only copy is already counted at another position.) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 236.00 Tm (2.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 236.00 Tm /F2 8.65 Tf (Category A \(Cognitive Support\) \227 Private letter notebook: ) Tj /F1 8.65 Tf (A dedicated My letter notebook scratchpad \(#notebook\) with a Clear) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 224.90 Tm /F1 8.65 Tf (notebook button lets players jot down candidate letters or word fragments beside the board without affecting gameplay, saved in) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 213.80 Tm /F1 8.65 Tf (localStorage.) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 200.10 Tm (3.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 200.10 Tm /F2 8.65 Tf (Category B \(Flexible Input and Output\) \227 Voice play, spelled-letter entry, and hands-free Voice mode: ) Tj /F1 8.65 Tf (channels/deepgram_voice.py) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 189.00 Tm /F1 8.65 Tf (proxies audio through the Rasa server to Deepgram Nova-3 \(/webhooks/deepgram/listen\) and streams natural Deepgram Aura-2) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 177.90 Tm /F1 8.65 Tf (\(aura-2-thalia-en\) speech back \(/webhooks/deepgram/speak, starting playback at 0.95x speed in ~0.3 s\). Silence detection waits until) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 166.80 Tm /F1 8.65 Tf (the player speaks and pauses for 1.2 seconds \(up to 15 s\) so slower speech is not cut off, and regex normalization joins spelled-out) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 155.70 Tm /F1 8.65 Tf (letters \("C, R, A, N, E" -> "CRANE"\). The header Voice mode button enables a continuous hands-free loop where Lexi reads each reply) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 144.60 Tm /F1 8.65 Tf (aloud and automatically listens for the player's next turn.) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 130.90 Tm (4.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 130.90 Tm /F2 8.65 Tf (Category B \(Flexible Input and Output\) \227 Large on-screen keyboard with QWERTY and A-Z layouts: ) Tj /F1 8.65 Tf (Players can switch between) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 119.80 Tm /F1 8.65 Tf (QWERTY and Alphabetical \(A to Z\) order in Settings, with each key showing both color and symbol badges.) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 106.10 Tm (5.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 106.10 Tm /F2 8.65 Tf (Category B \(Flexible Input and Output\) \227 Adjustable pace, text size, feedback style, and motion: ) Tj /F1 8.65 Tf (Instant toggles for three feedback) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 95.00 Tm /F1 8.65 Tf (themes, three text sizes \(Normal, Large, Extra large\), read-aloud output, and animation reduction \(data-motion="reduce" and) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 83.90 Tm /F1 8.65 Tf (prefers-reduced-motion\).) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 70.20 Tm (6.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 70.20 Tm /F2 8.65 Tf (Category C \(Emotional and Social Meaning\) \227 Gentle tone and confirmable "I give up": ) Tj /F1 8.65 Tf (Warm, encouraging phrasing with no streak) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 59.10 Tm /F1 8.65 Tf (counters and a confirmable I give up button that kindly reveals the word and offers a fresh round.) Tj ET
+0.45 0.45 0.45 rg BT /F1 8.5 Tf 1 0 0 1 216.00 20.00 Tm (Lexi's Word Game: Design Summary  \267  Page 2 of 3) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R /F4 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 9918 >>
+stream
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 754.00 Tm (7.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 754.00 Tm /F2 8.65 Tf (Category C \(Emotional and Social Meaning\) \227 Automatic save/resume and "New player" reset: ) Tj /F1 8.65 Tf (Rasa stores conversation trackers) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 742.90 Tm /F1 8.65 Tf (and slots in SQLite \(rasa_tracker.db\) keyed by an anonymous UUID \(rwg.sender\), while the browser saves the board, chat log, settings,) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 731.80 Tm /F1 8.65 Tf (and notebook in localStorage. Reloading restores the exact mid-game state, and Settings -> Start fresh for a new player resets the) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 720.70 Tm /F1 8.65 Tf (device for the next workshop participant.) Tj ET
+0.102 0.310 0.839 rg BT /F2 11.4 Tf 1 0 0 1 38.00 704.00 Tm (3. Reflection and Remaining Improvements) Tj ET
+0.80 0.84 0.88 RG 0.9 w 38.00 700.50 m 574.00 700.50 l S
+0.12 0.12 0.12 rg BT /F2 9.6 Tf 1 0 0 1 38.00 689.50 Tm (Evaluation and Lessons from the November Usability Sessions) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 38.00 680.00 Tm /F1 8.65 Tf (We evaluated the game using ) Tj /F2 8.65 Tf (live usability playtesting) Tj /F1 8.65 Tf ( \(with anonymous interaction logs captured in ) Tj /F4 8.65 Tf (rasa_tracker.db) Tj /F1 8.65 Tf ( across multiple) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 38.00 668.90 Tm /F1 8.65 Tf (play sessions on November 12-13 following our pre-workshop demo script\) combined with ) Tj /F2 8.65 Tf (simulated-impairment and heuristic checks) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 38.00 657.80 Tm /F1 8.65 Tf (\(grayscale/monochrome verification, WCAG 2.1 contrast calculation, 200% zoom reflow, keyboard-only navigation, and Microsoft Human-AI) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 38.00 646.70 Tm /F1 8.65 Tf (Interaction guidelines\).) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 38.00 633.00 Tm /F2 8.65 Tf (What worked well:) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 620.40 Tm (\225) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 620.40 Tm /F2 8.65 Tf (Forgiving validation reduced anxiety: ) Tj /F1 8.65 Tf (Playtest logs showed players routinely testing spelling variations when narrowing down the last) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 609.30 Tm /F1 8.65 Tf (one or two letters \(e.g., trying SEPNO, SWENE, and SENNE before solving SCENE -> SPENT in 4 guesses, or testing BAFLY, TARLY,) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 598.20 Tm /F1 8.65 Tf (and BARLY while searching for MANLY\). Because invalid words never cost a guess and immediately showed a brief toast note over the) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 587.10 Tm /F1 8.65 Tf (board, players experimented freely and completed multiple back-to-back games \(SPENT in 4, DEALT in 5, VIDEO in 5\).) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 573.40 Tm (\225) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 573.40 Tm /F2 8.65 Tf (Wordle-first layout with conversational backup: ) Tj /F1 8.65 Tf (Putting the board and on-screen keyboard front and center\227where typing anywhere fills) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 562.30 Tm /F1 8.65 Tf (the current row's tiles directly\227made the core loop immediately recognizable, while keeping the Lexi chat panel beside it for rules,) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 551.20 Tm /F1 8.65 Tf (encouragement, and voice questions.) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 537.50 Tm (\225) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 537.50 Tm /F2 8.65 Tf (No-shame "I give up" and instant restart: ) Tj /F1 8.65 Tf (When players hit tricky words \(CHEAT, WOMAN, IRONY, MAYBE\), they used I give up and) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 50.00 526.40 Tm /F1 8.65 Tf (immediately replied "Yes" or clicked Play again to start another round.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 38.00 512.70 Tm /F2 8.65 Tf (Issues discovered during testing and how we fixed them:) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 500.10 Tm (1.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 500.10 Tm /F2 8.65 Tf (Conversational speech mistaken for a 5-letter guess: ) Tj /F1 8.65 Tf (During voice testing, a participant said "hello can you hear me") Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 489.00 Tm /F1 8.65 Tf (\(rasa_tracker.db, Nov 12 14:45\), and the LLM extracted "HELLO" as a 5-letter guess, costing a turn\227prompting the tester to reply, "you) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 477.90 Tm /F1 8.65 Tf (shouldn't just take the first word no should you". Fix: Tightened make_wordle_guess in data/wordle/play.yml so multi-word sentences or) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 466.80 Tm /F1 8.65 Tf (questions are never treated as guesses unless the player explicitly names a word to guess, while a lone word like "HELLO" on its own) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 455.70 Tm /F1 8.65 Tf (remains a valid guess.) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 442.00 Tm (2.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 442.00 Tm /F2 8.65 Tf (Valid 5-letter guesses hijacked by "give up" or "new game" intents: ) Tj /F1 8.65 Tf (When a player guessed "ABORT" \(Nov 12 15:20\), the LLM routed) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 430.90 Tm /F1 8.65 Tf (it to give_up_wordle, prematurely ending the game and revealing "AMONG". Similarly, typing "Really" \(15:13\) triggered start_wordle.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 419.80 Tm /F1 8.65 Tf (Fix: Added lone_word_guess\(tracker\) in actions/action_wordle.py inside ActionStartWordle and ActionGiveUp so any single 5-letter) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 408.70 Tm /F1 8.65 Tf (alphabetic word during an active game is deterministically scored as a guess, and removed "abort" from the secret answer list) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 397.60 Tm /F1 8.65 Tf (\(REMOVE in game/curate.py\).) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 383.90 Tm (3.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 383.90 Tm /F2 8.65 Tf (Discoverability of voice features: ) Tj /F1 8.65 Tf (A tester typed "is there a voice mode" in chat \(Nov 12 14:39\) and hit the fallback message. Fix:) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 372.80 Tm /F1 8.65 Tf (Added the voice_mode flow \(data/wordle/play.yml and utter_voice_mode in domain/wordle.yml\) with interactive chat buttons \(Start voice) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 361.70 Tm /F1 8.65 Tf (mode and Read aloud only\) and placed a prominent Voice mode toggle button in the top navigation bar.) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 348.00 Tm (4.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 348.00 Tm /F2 8.65 Tf (Stray punctuation/numbers and default text scaling: ) Tj /F1 8.65 Tf (Logs showed stray symbols \("--=-", ",,,bravt"\) and speech-to-text number) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 336.90 Tm /F1 8.65 Tf (homophones \("80 I e u" for "ADIEU"\), while starting at Large text pushed the bottom of the keyboard below the fold on 13-inch laptops.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 325.80 Tm /F1 8.65 Tf (Fix: Restricted keyboard tile input to letters only \(currentLetters\(\)\), added the voice spelling tip \(SPELL_TIP\), and set the default text size) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 314.70 Tm /F1 8.65 Tf (to Normal \(112.5% / 18px\) while keeping Large and Extra large in Settings.) Tj ET
+0.12 0.12 0.12 rg BT /F2 9.6 Tf 1 0 0 1 38.00 299.50 Tm (Remaining Improvements for Future Iterations) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 290.00 Tm (1.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 290.00 Tm /F2 8.65 Tf (Spoken homophone normalization for voice guesses: ) Tj /F1 8.65 Tf (Adding a phonetic lookup table to map spoken homophones \(such as "80 I e u") Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 278.90 Tm /F1 8.65 Tf (or "a view" -> "ADIEU"\) against ALLOWED before rejecting would make single-word voice guessing even more forgiving without) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 267.80 Tm /F1 8.65 Tf (requiring the player to spell the word out.) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 254.10 Tm (2.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 254.10 Tm /F2 8.65 Tf (Tiered player-controlled hints \(Category A\): ) Tj /F1 8.65 Tf (Adding an optional Hint button offering two gentle, deterministic clues computed in) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 243.00 Tm /F1 8.65 Tf (game/wordle.py\227first a vowel count clue \("The word has 2 vowels"\), then revealing one unguessed letter position if requested\227would) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 231.90 Tm /F1 8.65 Tf (bridge the gap between "Why this letter?" and "I give up".) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 218.20 Tm (3.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 218.20 Tm /F2 8.65 Tf (Post-game word definitions and vocabulary journal \(Category D\): ) Tj /F1 8.65 Tf (Showing a brief, plain-English definition and example sentence in) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 207.10 Tm /F1 8.65 Tf (the game-over dialog \(#end-dlg\) and saving solved words to a local "Words I've Found" journal would add lasting educational value after) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 196.00 Tm /F1 8.65 Tf (each round.) Tj ET
+0.10 0.10 0.10 rg BT /F2 8.65 Tf 1 0 0 1 40.00 182.30 Tm (4.) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 182.30 Tm /F2 8.65 Tf (Per-player guess limit setting \(Category C\): ) Tj /F1 8.65 Tf (Exposing a choice of 6 guesses \(Standard\), 8 guesses \(Relaxed\), or Unlimited guesses in) Tj ET
+BT 0.100 0.100 0.100 rg 1 0 0 1 52.00 171.20 Tm /F1 8.65 Tf (Settings would support players who want to solve every puzzle at their own pace without ever running out of turns.) Tj ET
+0.45 0.45 0.45 rg BT /F1 8.5 Tf 1 0 0 1 216.00 20.00 Tm (Lexi's Word Game: Design Summary  \267  Page 3 of 3) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R /F4 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Type /Pages /Kids [ 6 0 R 8 0 R 10 0 R ] /Count 3 >>
+endobj
+12 0 obj
+<< /Type /Catalog /Pages 11 0 R >>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000015 00000 n 
+0000000112 00000 n 
+0000000214 00000 n 
+0000000319 00000 n 
+0000000419 00000 n 
+0000014802 00000 n 
+0000014959 00000 n 
+0000027817 00000 n 
+0000027974 00000 n 
+0000037944 00000 n 
+0000038102 00000 n 
+0000038175 00000 n 
+trailer
+<< /Size 13 /Root 12 0 R >>
+startxref
+38226
+%%EOF

@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lexi's Word Game — Workshop Flyer (November 16)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: letter portrait; margin: 0.4in; }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  body {
+    margin: 0;
+    padding: 0.35in 0.4in;
+    background: #FFFFFF;
+    color: #111111;
+    font-family: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 18pt;
+    line-height: 1.38;
+    max-width: 8.5in;
+    margin-inline: auto;
+  }
+  header {
+    border-bottom: 4px solid #111111;
+    padding-bottom: 0.12in;
+    margin-bottom: 0.18in;
+  }
+  h1 {
+    font-size: 31pt;
+    line-height: 1.12;
+    margin: 0 0 0.05in;
+    color: #1A4FD6;
+  }
+  .subtitle {
+    font-size: 19pt;
+    font-weight: 700;
+    margin: 0;
+    color: #1F1F1F;
+  }
+  .start-box {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.2in;
+    align-items: center;
+    background: #FAF8F3;
+    border: 3px solid #111111;
+    border-radius: 14px;
+    padding: 0.16in 0.22in;
+    margin-bottom: 0.18in;
+  }
+  .start-box h2 {
+    margin: 0 0 0.05in;
+    font-size: 21pt;
+  }
+  .url {
+    display: inline-block;
+    font-size: 22pt;
+    font-weight: 700;
+    color: #1A4FD6;
+    text-decoration: underline;
+    margin: 0.03in 0;
+    word-break: break-all;
+  }
+  .qr-wrap {
+    text-align: center;
+  }
+  .qr-wrap img {
+    width: 1.65in;
+    height: 1.65in;
+    display: block;
+    border: 2px solid #111111;
+    border-radius: 8px;
+  }
+  .qr-caption {
+    font-size: 13pt;
+    font-weight: 700;
+    margin-top: 0.04in;
+  }
+  h2 {
+    font-size: 21pt;
+    margin: 0.14in 0 0.08in;
+  }
+  ol {
+    margin: 0 0 0.12in;
+    padding-left: 0.35in;
+  }
+  li {
+    margin-bottom: 0.07in;
+  }
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.14in;
+    margin: 0.1in 0 0.15in;
+  }
+  .tile-card {
+    border: 3px solid #111111;
+    border-radius: 12px;
+    padding: 0.11in;
+    display: flex;
+    align-items: center;
+    gap: 0.12in;
+    background: #FFFFFF;
+  }
+  .sample {
+    width: 0.8in;
+    height: 0.92in;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+    line-height: 1.05;
+  }
+  .sample .letter { font-size: 22pt; }
+  .sample .badge { font-size: 10.5pt; }
+  .sample.correct { background: #1D6F42; color: #FFFFFF; border: 4px solid #1D6F42; }
+  .sample.present { background: #F2C14E; color: #1F1F1F; border: 4px dashed #6B4C00; }
+  .sample.absent  { background: #E4E4E4; color: #333333; border: 3px dotted #6B6B6B; }
+  .sample.absent .letter { text-decoration: line-through; }
+  .tile-desc { font-size: 15pt; line-height: 1.25; }
+  .extras {
+    background: #FAF8F3;
+    border: 2px solid #4A4A4A;
+    border-radius: 12px;
+    padding: 0.14in 0.2in;
+    font-size: 16.5pt;
+  }
+  .extras ul {
+    margin: 0.05in 0 0;
+    padding-left: 0.3in;
+  }
+  @media print {
+    body { padding: 0; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Lexi's Word Game</h1>
+    <p class="subtitle">A relaxing 5-letter word puzzle with a friendly helper. No timer, no pressure.</p>
+  </header>
+
+  <section class="start-box" aria-label="How to start">
+    <div>
+      <h2>How to start</h2>
+      <p style="margin:0">Open Chrome, Edge, or Safari and go to:</p>
+      <p class="url">lexi.salvadorlomeli.com</p>
+      <p style="margin:0;font-size:15.5pt">A new game starts right away—no sign-up or password needed.</p>
+    </div>
+    <div class="qr-wrap">
+      <img src="qr-code.svg" alt="QR code for https://lexi.salvadorlomeli.com">
+      <div class="qr-caption">Scan to play</div>
+    </div>
+  </section>
+
+  <h2>How to play</h2>
+  <ol>
+    <li><strong>Guess any 5-letter word.</strong> Type on your keyboard, tap the large letters on screen, or press <strong>Voice mode</strong> / <strong>Speak</strong> to say or spell it out (like <em>"C, R, A, N, E"</em>).</li>
+    <li><strong>Check the clues on each tile.</strong> Every tile shows a color, a symbol, and a word:</li>
+  </ol>
+
+  <div class="tiles">
+    <div class="tile-card">
+      <div class="sample correct" aria-hidden="true">
+        <span class="letter">A</span>
+        <span class="badge">✓ Right</span>
+      </div>
+      <div class="tile-desc"><strong>✓ Right</strong><br>Right letter, in the right spot.</div>
+    </div>
+    <div class="tile-card">
+      <div class="sample present" aria-hidden="true">
+        <span class="letter">B</span>
+        <span class="badge">● In word</span>
+      </div>
+      <div class="tile-desc"><strong>● In word</strong><br>In the word, in a different spot.</div>
+    </div>
+    <div class="tile-card">
+      <div class="sample absent" aria-hidden="true">
+        <span class="letter">C</span>
+        <span class="badge">✕ Not in</span>
+      </div>
+      <div class="tile-desc"><strong>✕ Not in</strong><br>Not anywhere in the word.</div>
+    </div>
+  </div>
+
+  <ol start="3">
+    <li><strong>You have 6 tries.</strong> Words Lexi doesn't know <strong>never</strong> cost a guess. Stuck? Press <strong>I give up</strong> any time and Lexi will kindly tell you the word.</li>
+  </ol>
+
+  <section class="extras" aria-label="Helpful extras">
+    <strong>Helpful features built in:</strong>
+    <ul>
+      <li><strong>Why this letter?</strong> Tap any scored tile on the board to read or hear why it got that clue.</li>
+      <li><strong>Voice mode &amp; Read aloud:</strong> Hear Lexi's replies out loud and talk back hands-free.</li>
+      <li><strong>Comfort settings:</strong> Extra-large text, no-color or dark high-contrast styles, an A-to-Z keyboard, and a private <strong>Letter notebook</strong>.</li>
+    </ul>
+  </section>
+</body>
+</html>

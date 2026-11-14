@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lexi's Word Game: Design Summary — Salvador Lomeli Rodriguez</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: letter portrait;
+    margin: 0.5in 0.55in;
+  }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  body {
+    margin: 0;
+    padding: 0.45in 0.5in;
+    background: #FFFFFF;
+    color: #1A1A1A;
+    font-family: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 9.8pt;
+    line-height: 1.38;
+    max-width: 8.5in;
+    margin-inline: auto;
+  }
+  header.doc-header {
+    border-bottom: 2.5px solid #1A4FD6;
+    padding-bottom: 6pt;
+    margin-bottom: 10pt;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 8pt;
+  }
+  h1 {
+    font-size: 18pt;
+    line-height: 1.15;
+    margin: 0;
+    color: #1A4FD6;
+  }
+  .meta {
+    font-size: 9.5pt;
+    color: #333333;
+    text-align: right;
+  }
+  h2 {
+    font-size: 13pt;
+    color: #1A4FD6;
+    border-bottom: 1.5px solid #D0D7DE;
+    padding-bottom: 2pt;
+    margin: 10pt 0 5pt;
+    break-after: avoid;
+  }
+  h3 {
+    font-size: 10.6pt;
+    color: #1F1F1F;
+    margin: 8pt 0 3pt;
+    break-after: avoid;
+  }
+  p {
+    margin: 0 0 5pt;
+  }
+  ul, ol {
+    margin: 0 0 6pt;
+    padding-left: 16pt;
+  }
+  li {
+    margin-bottom: 2.5pt;
+  }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 8.8pt;
+    background: #F3F4F6;
+    padding: 0.5pt 3pt;
+    border-radius: 3pt;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 5pt 0 8pt;
+    font-size: 9pt;
+    line-height: 1.3;
+    break-inside: avoid;
+  }
+  th, td {
+    border: 1px solid #767676;
+    padding: 3.5pt 6pt;
+    vertical-align: top;
+    text-align: left;
+  }
+  th {
+    background: #EEF3FF;
+    color: #1F1F1F;
+    font-weight: 700;
+  }
+  td.num, th.num {
+    text-align: right;
+    white-space: nowrap;
+  }
+  .diagram-wrap {
+    text-align: center;
+    margin: 6pt 0 8pt;
+    break-inside: avoid;
+  }
+  .diagram-wrap img {
+    max-width: 100%;
+    max-height: 3.15in;
+    width: auto;
+    height: auto;
+    border: 1px solid #CCCCCC;
+    border-radius: 6pt;
+  }
+  @media print {
+    body { padding: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="doc-header">
+  <div>
+    <h1>Lexi's Word Game: Design Summary</h1>
+    <div style="font-size:9.5pt;color:#4A4A4A;">Accessible Conversational Wordle for Older Adults · Live at <strong>https://lexi.salvadorlomeli.com</strong></div>
+  </div>
+  <div class="meta">
+    <strong>Salvador Lomeli Rodriguez</strong><br>
+    AI 380: Human-AI Interaction · HW3 · Fall 2026
+  </div>
+</header>
+
+<h2>1. Design Concepts</h2>
+
+<h3>Target Players and Barriers in Standard Wordle</h3>
+<p><strong>Lexi's Word Game</strong> is a relaxing, accessible Wordle-style puzzle designed for older adults (age 60+). While New York Times (NYT) Wordle is a widely enjoyed daily ritual, its interface assumes perceptual, motor, and cognitive baselines that create friction or exclusion for many older players (W3C WCAG 2.1; National Institute on Aging; Nielsen Norman Group, <em>Usability for Senior Citizens</em>):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width:23%">NYT Wordle Barrier</th>
+      <th style="width:29%">Impact on Older Adults</th>
+      <th style="width:48%">How Lexi's Word Game Removes It</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Color-only tile feedback</strong> (green, yellow, gray)</td>
+      <td>Age-related lens yellowing and color-vision deficiencies make hues hard to tell apart.</td>
+      <td>Every scored tile pairs color with a <strong>symbol</strong> (<code>✓</code>, <code>●</code>, <code>✕</code>), a <strong>plain-English label</strong> (<code>Right</code>, <code>In word</code>, <code>Not in</code>), a <strong>distinct border style</strong> (solid, dashed, dotted), and strikethrough on absent letters, plus a zero-hue monochrome mode.</td>
+    </tr>
+    <tr>
+      <td><strong>Small, fixed typography and tight keys</strong></td>
+      <td>Presbyopia, low vision, and mild hand tremor make small text and closely packed keys tiring or error-prone.</td>
+      <td>Uses <strong>Atkinson Hyperlegible</strong> at <code>112.5%</code> base size with <code>Large</code> (<code>1.2×</code>) and <code>Extra large</code> (<code>1.4×</code>) settings, fluid <code>rem</code> scaling at 200% zoom, and controls &ge; 44 &times; 44 px in QWERTY or alphabetical (<code>A–Z</code>) order.</td>
+    </tr>
+    <tr>
+      <td><strong>Keyboard/touch-only entry</strong></td>
+      <td>Arthritis, tremor, or unfamiliarity with on-screen keyboards can make typing slow or uncomfortable.</td>
+      <td>Multi-modal input: players can type on a physical keyboard, tap large on-screen keys, press <strong>Speak</strong>, or use hands-free <strong>Voice mode</strong> to say a word (<code>"crane"</code>) or spell it out (<code>"C, R, A, N, E"</code>).</td>
+    </tr>
+    <tr>
+      <td><strong>High working-memory load</strong></td>
+      <td>Remembering which duplicate letters are already accounted for or why a tile was scored a certain way taxes working memory.</td>
+      <td>Clicking or arrow-keying to any scored tile opens the <strong>"Why this letter?"</strong> explainer (in text and speech), alongside a persistent <strong>Letter notebook</strong> and full conversation log.</td>
+    </tr>
+    <tr>
+      <td><strong>Unforgiving daily format and streak pressure</strong></td>
+      <td>One puzzle a day, win-streak counters, and no graceful exit when stuck can turn a casual puzzle into a test.</td>
+      <td>Unlimited games with <strong>no timers and no streaks</strong>, curated everyday answers, zero penalty for unknown or mistyped words, and a gentle <strong>"I give up"</strong> option that kindly reveals the word.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Core Design Philosophy and AI Boundary</h3>
+<p>Lexi is framed as a patient, encouraging companion rather than a judge. Following the <strong>Microsoft Guidelines for Human-AI Interaction</strong> (clear capabilities, graceful error recovery, and appropriate division of control), the architecture strictly separates <strong>conversational understanding</strong> from <strong>deterministic game rules</strong>:</p>
+
+<div class="diagram-wrap">
+  <img src="../m1-design-concept/data-flow.svg" alt="Data-flow diagram for Lexi's Word Game">
+</div>
+
+<ul>
+  <li><strong>Where AI helps:</strong> Rasa Pro's <code>SearchReadyLLMCommandGenerator</code> (powered by <code>gemini-3.1-flash-lite</code> with automatic retry routing) interprets flexible natural language—such as <code>"my guess is crane"</code>, <code>"how do I play?"</code>, or <code>"can I talk to you?"</code>—so players never have to memorize rigid commands.</li>
+  <li><strong>Where AI never takes control:</strong> The language model never chooses the secret word, checks dictionary validity, counts turns, or scores letters. All game state lives in Rasa <code>controlled</code> slots (<code>wordle_answer</code>, <code>wordle_guesses</code>, <code>wordle_active</code>) updated exclusively by deterministic Python in <code>actions/action_wordle.py</code> and <code>game/wordle.py</code>. In addition, the NLG rephraser prompt (<code>prompts/rephraser_demo_personality_prompt.jinja2</code>) enforces a strict constitutional rule never to invent word validity, letter counts, letter positions, remaining guesses, or the secret answer.</li>
+</ul>
+
+<h2>2. Core Achievements</h2>
+
+<h3>Core Game Correctness (G1–G7)</h3>
+<p>All seven core requirements are implemented in <code>game/wordle.py</code>, <code>game/curate.py</code>, and <code>actions/action_wordle.py</code>:</p>
+<ul>
+  <li><strong>G1 — Hidden five-letter answer at game start:</strong> <code>wordle.new_answer()</code> selects a random 5-letter word from <code>game/answers.txt</code> when <code>ActionStartWordle</code> runs. On the web page, a new game starts automatically on first load, and the secret word is omitted from the <code>wordle_board</code> JSON payload until <code>status</code> changes from <code>"playing"</code> to <code>"won"</code> or <code>"lost"</code>.</li>
+  <li><strong>G2 — Fixed, justified number of guesses:</strong> <code>MAX_GUESSES = 6</code>. Keeping six guesses preserves familiarity for players who have seen NYT Wordle with family members, while pairing those six turns with a curated common-word pool, zero penalty for invalid or repeated guesses, and a no-shame <code>"I give up"</code> button so six tries feel supportive rather than restrictive.</li>
+  <li><strong>G3 — Validation against <code>english.py</code>:</strong> <code>ALLOWED</code> precomputes a Python <code>set</code> of all 8,548 five-letter alphabetic words in <code>ENGLISH_WORDS</code> from <code>game/english.py</code> for <em>O(1)</em> lookup while keeping every valid 5-letter word in <code>english.py</code> playable as a guess.</li>
+  <li><strong>G4 — Forgiving handling of invalid guesses:</strong> <code>wordle.normalize()</code> strips spaces and hyphens and lowercases input so <code>"C R A N E"</code> and <code>"crane"</code> work identically. <code>wordle.validate()</code> checks for empty input, non-letter characters, words shorter or longer than 5 letters, and words not in <code>ALLOWED</code>. <code>score_guess()</code> also catches duplicate guesses already tried in the same game. Invalid or repeated guesses return a clear, polite explanation, leave <code>wordle_guesses</code> unchanged, keep typed letters in the input box for easy editing, and append a spelling tip when on a voice channel.</li>
+  <li><strong>G5 — Accurate repeated-letter scoring:</strong> <code>wordle.score(guess, answer)</code> uses a deterministic two-pass algorithm adapted from an earlier Wordle implementation. Pass 1 marks exact position matches as <code>correct</code> and replaces matched letters in a working copy of <code>answer</code> with <code>"*"</code>. Pass 2 marks non-correct letters as <code>present</code> only if an unmatched copy remains in the working list, crossing off each matched copy as it is used (e.g., guessing <code>SPEED</code> against <code>ABIDE</code> marks only the first <code>E</code> as <code>present</code> and the second <code>E</code> as <code>absent</code>). <code>wordle.keyboard_state()</code> tracks the highest state seen per letter (<code>absent &lt; present &lt; correct</code>) so a key never downgrades once found in the right spot.</li>
+  <li><strong>G6 — Clear win/loss message and restart:</strong> <code>wordle.end_message()</code> announces wins with the answer and guess count and losses gently. The web page also opens a game-over summary modal (<code>#end-dlg</code>) with a miniature board recap and a focused <strong>Play again</strong> button, and players can restart any time by clicking <strong>New game</strong> or saying <code>"yes"</code> / <code>"new game"</code>.</li>
+  <li><strong>G7 — Curated answer pool:</strong> Because <code>english.py</code> contains 8,548 five-letter words—including obscure terms, inflections, proper nouns, and slurs—<code>game/curate.py</code> builds <code>game/answers.txt</code> through a reproducible four-step pipeline (all 8,548 words remain valid as guesses):</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width:8%">Step</th>
+      <th>Filter Applied in <code>game/curate.py</code></th>
+      <th class="num" style="width:18%">Words Left</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>All 5-letter alphabetic words in <code>english.py</code> (<code>ALLOWED</code>)</td>
+      <td class="num">8,548</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Keep common everyday words with <code>wordfreq</code> Zipf frequency &ge; 3.5 (~3+ occurrences per million words)</td>
+      <td class="num">1,740</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Drop simple plurals (<code>-s</code>, <code>-es</code>, <code>-ies</code>) and regular past tenses (<code>-ed</code>, <code>-ied</code>) whose base word is in <code>english.py</code></td>
+      <td class="num">1,248</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Remove 105 manually reviewed words in <code>REMOVE</code>: slurs/crude terms, upsetting violent/medical words (<code>death</code>, <code>tumor</code>, <code>abort</code>), personal/place/brand names, and British spellings/slang</td>
+      <td class="num"><strong>1,143</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Accessible Feedback and Interaction</h3>
+<p>The web front end (<code>web/index.html</code>, documented in <code>web/README.md</code>) implements all three accessibility priorities following WCAG 2.1 Level AA/AAA criteria:</p>
+<ul>
+  <li><strong>Perceivable feedback without color:</strong> Every scored tile shows four redundant cues: (1) background fill, (2) a distinct icon (<code>✓</code>, <code>●</code>, <code>✕</code>), (3) an explicit word label on the tile (<code>Right</code>, <code>In word</code>, <code>Not in</code>), and (4) a distinct border (<code>4px solid</code> for Right, <code>4px dashed</code> for In word, <code>3px dotted</code> plus strikethrough letter text for Not in). Players can switch between <strong>Colors, symbols, and words</strong> (<code>standard</code>), <strong>Symbols and words only</strong> (<code>mono</code>, zero hue—a built-in grayscale verification), and <strong>High contrast, dark background</strong> (<code>dark</code>). Across all three themes, WCAG 2.1 contrast ratios exceed 4.5:1 for all text (<strong>6.17:1–16.48:1</strong> in <code>standard</code>, <strong>9.94:1–18.88:1</strong> in <code>mono</code>, and <strong>8.21:1–21.00:1</strong> in <code>dark</code>) and exceed 3:1 for all tile edges, control borders, and focus rings (<strong>4.28:1–21.00:1</strong>). Plain-language summaries from <code>wordle.describe()</code> are announced via an <code>aria-live="polite"</code> status region (<code>#status</code>) and per-row <code>.sr-only</code> labels.</li>
+  <li><strong>Operable, forgiving interaction:</strong> Full keyboard-only play (type letters anywhere, <code>Backspace</code> to delete, <code>Enter</code> to submit, roving <code>tabIndex</code> with arrow-key navigation across scored tiles, a <code>4px solid</code> <code>:focus-visible</code> outline with <code>3px</code> offset, and a <code>Skip to the guess box</code> link). All buttons and keys enforce <code>min-height: 2.75rem; min-width: 2.75rem</code> (&ge; 44 &times; 44 px). Destructive actions (<strong>I give up</strong> and <strong>Start fresh for a new player</strong>) ask for confirmation in a modal dialog.</li>
+  <li><strong>Readable, supportive design:</strong> Uses <strong>Atkinson Hyperlegible</strong>, fluid <code>rem</code> sizing, and <code>clamp()</code> board dimensions that reflow cleanly at 200% zoom without horizontal scrolling. Prior guesses remain on the board, the full chat history stays visible with a <strong>Repeat last message</strong> button, a <strong>How to play</strong> dialog with a live tile legend opens automatically on first visit and remains accessible via <strong>Help</strong>, and all settings persist in <code>localStorage</code>.</li>
+</ul>
+
+<h3>Enhancements Beyond NYT</h3>
+<p>Lexi's Word Game implements <strong>seven enhancements across Categories A, B, and C</strong> (exceeding the requirement of three enhancements across two categories):</p>
+<ol>
+  <li><strong>Category A (Cognitive Support) — "Why this letter?" explainer:</strong> Selecting any scored board tile calls <code>explainTile(r, c)</code>, which displays and speaks a plain-language explanation tailored to that exact tile—explicitly explaining duplicate-letter cases when a second copy of a letter is marked <code>Not in</code> because the secret word's only copy is already counted at another position.</li>
+  <li><strong>Category A (Cognitive Support) — Private letter notebook:</strong> A dedicated <strong>My letter notebook</strong> scratchpad (<code>#notebook</code>) with a <strong>Clear notebook</strong> button lets players jot down candidate letters or word fragments beside the board without affecting gameplay, saved in <code>localStorage</code>.</li>
+  <li><strong>Category B (Flexible Input and Output) — Voice play, spelled-letter entry, and hands-free Voice mode:</strong> <code>channels/deepgram_voice.py</code> proxies audio through the Rasa server to <strong>Deepgram Nova-3</strong> (<code>/webhooks/deepgram/listen</code>) and streams natural <strong>Deepgram Aura-2</strong> (<code>aura-2-thalia-en</code>) speech back (<code>/webhooks/deepgram/speak</code>, starting playback at <code>0.95×</code> speed in ~0.3 s). Silence detection waits until the player speaks and pauses for 1.2 seconds (up to 15 s) so slower speech is not cut off, and regex normalization joins spelled-out letters (<code>"C, R, A, N, E"</code> &rarr; <code>"CRANE"</code>). The header <strong>🎙️ Voice mode</strong> button enables a continuous hands-free loop where Lexi reads each reply aloud and automatically listens for the player's next turn.</li>
+  <li><strong>Category B (Flexible Input and Output) — Large on-screen keyboard with QWERTY and A–Z layouts:</strong> Players can switch between <strong>QWERTY</strong> and <strong>Alphabetical (A to Z)</strong> order in Settings, with each key showing both color and symbol badges (<code>✓</code>, <code>●</code>, <code>✕</code>).</li>
+  <li><strong>Category B (Flexible Input and Output) — Adjustable pace, text size, feedback style, and motion:</strong> Instant toggles for three feedback themes, three text sizes (<code>Normal</code>, <code>Large</code>, <code>Extra large</code>), read-aloud output, and animation reduction (<code>data-motion="reduce"</code> and <code>prefers-reduced-motion</code>).</li>
+  <li><strong>Category C (Emotional and Social Meaning) — Gentle tone and confirmable "I give up":</strong> Warm, encouraging phrasing with no streak counters and a confirmable <strong>I give up</strong> button that kindly reveals the word and offers a fresh round.</li>
+  <li><strong>Category C (Emotional and Social Meaning) — Automatic save/resume and "New player" reset:</strong> Rasa stores conversation trackers and slots in SQLite (<code>rasa_tracker.db</code>) keyed by an anonymous UUID (<code>rwg.sender</code>), while the browser saves the board, chat log, settings, and notebook in <code>localStorage</code>. Reloading restores the exact mid-game state, and <strong>Settings &rarr; Start fresh for a new player</strong> resets the device for the next workshop participant.</li>
+</ol>
+
+<h2>3. Reflection and Remaining Improvements</h2>
+
+<h3>Evaluation and Lessons from the November Usability Sessions</h3>
+<p>We evaluated the game using <strong>live usability playtesting</strong> (with anonymous interaction logs captured in <code>rasa_tracker.db</code> across multiple sessions on November 12–13 following our pre-workshop demo script) combined with <strong>simulated-impairment and heuristic checks</strong> (grayscale/monochrome verification, WCAG 2.1 contrast calculation, 200% zoom reflow, keyboard-only navigation, and Microsoft Human-AI Interaction guidelines).</p>
+
+<p><strong>What worked well:</strong></p>
+<ul>
+  <li><strong>Forgiving validation reduced anxiety:</strong> Playtest logs showed players routinely testing spelling variations when narrowing down the last one or two letters (e.g., trying <code>SEPNO</code>, <code>SWENE</code>, and <code>SENNE</code> before solving <code>SCENE</code> &rarr; <code>SPENT</code> in 4 guesses, or testing <code>BAFLY</code>, <code>TARLY</code>, and <code>BARLY</code> while searching for <code>MANLY</code>). Because invalid words never cost a guess and immediately showed a brief toast note over the board, players experimented freely and completed multiple back-to-back games (<code>SPENT</code> in 4, <code>DEALT</code> in 5, <code>VIDEO</code> in 5).</li>
+  <li><strong>Wordle-first layout with conversational backup:</strong> Putting the board and on-screen keyboard front and center—where typing anywhere fills the current row's tiles directly—made the core loop immediately recognizable, while keeping the Lexi chat panel beside it for rules, encouragement, and voice questions.</li>
+  <li><strong>No-shame "I give up" and instant restart:</strong> When players hit tricky words (<code>CHEAT</code>, <code>WOMAN</code>, <code>IRONY</code>, <code>MAYBE</code>), they used <strong>I give up</strong> and immediately replied <code>"Yes"</code> or clicked <strong>Play again</strong> to start another round.</li>
+</ul>
+
+<p><strong>Issues discovered during testing and how we fixed them:</strong></p>
+<ol>
+  <li><strong>Conversational speech mistaken for a 5-letter guess:</strong> During voice testing, a participant said <code>"hello can you hear me"</code> (<code>rasa_tracker.db</code>, Nov 12 14:45), and the LLM extracted <code>"HELLO"</code> as a 5-letter guess, costing a turn—prompting the tester to reply, <code>"you shouldn't just take the first word no should you"</code>. <em>Fix:</em> Tightened <code>make_wordle_guess</code> in <code>data/wordle/play.yml</code> so multi-word sentences or questions are never treated as guesses unless the player explicitly names a word to guess, while a lone word like <code>"HELLO"</code> on its own remains a valid guess.</li>
+  <li><strong>Valid 5-letter guesses hijacked by "give up" or "new game" intents:</strong> When a player guessed <code>"ABORT"</code> (Nov 12 15:20), the LLM routed it to <code>give_up_wordle</code>, prematurely ending the game and revealing <code>"AMONG"</code>. Similarly, typing <code>"Really"</code> (15:13) triggered <code>start_wordle</code>. <em>Fix:</em> Added <code>lone_word_guess(tracker)</code> in <code>actions/action_wordle.py</code> inside <code>ActionStartWordle</code> and <code>ActionGiveUp</code> so any single 5-letter alphabetic word during an active game is deterministically scored as a guess, and removed <code>"abort"</code> from the secret answer list (<code>REMOVE</code> in <code>game/curate.py</code>).</li>
+  <li><strong>Discoverability of voice features:</strong> A tester typed <code>"is there a voice mode"</code> in chat (Nov 12 14:39) and hit the fallback message. <em>Fix:</em> Added the <code>voice_mode</code> flow (<code>data/wordle/play.yml</code> and <code>utter_voice_mode</code> in <code>domain/wordle.yml</code>) with interactive chat buttons (<strong>🎙️ Start voice mode</strong> and <strong>🔊 Read aloud only</strong>) and placed a prominent <strong>🎙️ Voice mode</strong> toggle button in the top navigation bar.</li>
+  <li><strong>Stray punctuation/numbers and default text scaling:</strong> Logs showed stray symbols (<code>"--=-"</code>, <code>",,,bravt"</code>) and speech-to-text number homophones (<code>"80 I e u"</code> for <code>"ADIEU"</code>), while starting at <code>Large</code> text pushed the bottom of the keyboard below the fold on 13-inch laptops. <em>Fix:</em> Restricted keyboard tile input to letters only (<code>currentLetters()</code>), added the voice spelling tip (<code>SPELL_TIP</code>), and set the default text size to <code>Normal</code> (<code>112.5%</code> / <code>18px</code>) while keeping <code>Large</code> and <code>Extra large</code> in Settings.</li>
+</ol>
+
+<h3>Remaining Improvements for Future Iterations</h3>
+<ol>
+  <li><strong>Spoken homophone normalization for voice guesses:</strong> Adding a phonetic lookup table to map spoken homophones (such as <code>"80 I e u"</code> or <code>"a view"</code> &rarr; <code>"ADIEU"</code>) against <code>ALLOWED</code> before rejecting would make single-word voice guessing even more forgiving without requiring the player to spell the word out.</li>
+  <li><strong>Tiered player-controlled hints (Category A):</strong> Adding an optional <strong>Hint</strong> button offering two gentle, deterministic clues computed in <code>game/wordle.py</code>—first a vowel count clue (<code>"The word has 2 vowels"</code>), then revealing one unguessed letter position if requested—would bridge the gap between <code>"Why this letter?"</code> and <code>"I give up"</code>.</li>
+  <li><strong>Post-game word definitions and vocabulary journal (Category D):</strong> Showing a brief, plain-English definition and example sentence in the game-over dialog (<code>#end-dlg</code>) and saving solved words to a local "Words I've Found" journal would add lasting reflection value after each round.</li>
+  <li><strong>Per-player guess limit setting (Category C):</strong> Exposing a choice of <strong>6 guesses (Standard)</strong>, <strong>8 guesses (Relaxed)</strong>, or <strong>Unlimited guesses</strong> in Settings would support players who want to solve every puzzle at their own pace without ever running out of turns.</li>
+</ol>
+
+</body>
+</html>

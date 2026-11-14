@@ -1,7 +1,7 @@
 ########################################
 # Name: Salvador Lomeli
 # Course: AI 380 Human-AI Interaction - HW3: Wordle for Everyone
-# GenAI: Claude (Claude Code) wrote this curation script.
+# GenAI: Claude (Claude Code) helped write this curation script.
 # Description: G7 - builds game/answers.txt, the answer pool, from english.py
 #              so players are only asked to guess common, familiar words.
 #

@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 840" width="1120" height="840" role="img" aria-label="Data-flow diagram for Lexi's Word Game">
+  <defs>
+    <style>
+      .bg { fill: #FAF8F3; }
+      .box { fill: #FFFFFF; stroke: #1F1F1F; stroke-width: 2.5; }
+      .box-ai { fill: #EEF3FF; stroke: #1A4FD6; stroke-width: 2.5; }
+      .box-py { fill: #EAF6EE; stroke: #1D6F42; stroke-width: 2.5; }
+      .box-store { fill: #FFF9E6; stroke: #6B4C00; stroke-width: 2.5; stroke-dasharray: 7 4; }
+      .title { font: 700 17px system-ui, -apple-system, "Segoe UI", Arial, sans-serif; fill: #1F1F1F; }
+      .sub { font: 400 13.5px system-ui, -apple-system, "Segoe UI", Arial, sans-serif; fill: #333333; }
+      .code { font: 700 12.5px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1A4FD6; }
+      .code-py { font: 700 12.5px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #1D6F42; }
+      .code-store { font: 700 12.5px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #6B4C00; }
+      .label { font: 700 12.5px system-ui, -apple-system, "Segoe UI", Arial, sans-serif; fill: #1F1F1F; }
+      .arrow { stroke: #1F1F1F; stroke-width: 2.5; fill: none; marker-end: url(#head); }
+      .arrow-bi { stroke: #333333; stroke-width: 2.5; fill: none; marker-end: url(#head); marker-start: url(#head-rev); }
+    </style>
+    <marker id="head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1F1F1F"/>
+    </marker>
+    <marker id="head-rev" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 1 L 0 5 L 10 9 z" fill="#333333"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1120" height="840" rx="16"/>
+
+  <!-- ================= 1. PLAYER ================= -->
+  <rect class="box" x="40" y="24" width="560" height="92" rx="12"/>
+  <text class="title" x="64" y="52">1. Player Input &amp; Output</text>
+  <text class="sub" x="64" y="76">• Types on keyboard or taps large QWERTY / A–Z keys</text>
+  <text class="sub" x="64" y="97">• Speaks or spells words ("C, R, A, N, E") in Voice mode</text>
+
+  <!-- Arrow 1 <-> 2 -->
+  <line class="arrow-bi" x1="280" y1="116" x2="280" y2="164"/>
+  <text class="label" x="296" y="145">Guesses in / visual &amp; spoken feedback out</text>
+
+  <!-- ================= 2. WEB FRONT END ================= -->
+  <rect class="box" x="40" y="164" width="560" height="134" rx="12"/>
+  <text class="title" x="64" y="192">2. Accessible Web Front End</text>
+  <text class="code" x="64" y="212">web/index.html</text>
+  <text class="sub" x="64" y="236">• Draws 6×5 board (color, symbol, word label, border)</text>
+  <text class="sub" x="64" y="257">• Announces results in ARIA live region &amp; audio</text>
+  <text class="sub" x="64" y="278">• Runs "Why this letter?" explainer &amp; input checks</text>
+
+  <!-- Side Box A: Browser localStorage -->
+  <rect class="box-store" x="700" y="144" width="380" height="128" rx="12"/>
+  <text class="title" x="724" y="172">Browser localStorage</text>
+  <text class="code-store" x="724" y="192">rwg.* keys (client-side only)</text>
+  <text class="sub" x="724" y="216">• rwg.sender (anonymous player UUID)</text>
+  <text class="sub" x="724" y="237">• rwg.settings (theme, text size, voice)</text>
+  <text class="sub" x="724" y="258">• rwg.board, rwg.log &amp; rwg.notebook</text>
+
+  <!-- Arrow Web <-> localStorage -->
+  <line class="arrow-bi" x1="600" y1="206" x2="700" y2="206"/>
+  <text class="label" x="650" y="196" text-anchor="middle">Save / load</text>
+
+  <!-- Side Box B: Deepgram Voice Channel -->
+  <rect class="box-ai" x="700" y="290" width="380" height="114" rx="12"/>
+  <text class="title" x="724" y="318">Deepgram Voice Channel</text>
+  <text class="code" x="724" y="338">channels/deepgram_voice.py</text>
+  <text class="sub" x="724" y="362">• POST /listen (Nova-3 speech-to-text)</text>
+  <text class="sub" x="724" y="383">• GET /speak (Aura-2 streamed MP3)</text>
+
+  <!-- Arrow Web <-> Deepgram -->
+  <path class="arrow-bi" d="M 600 262 L 650 262 L 650 347 L 700 347"/>
+  <text class="label" x="650" y="252" text-anchor="middle">Audio</text>
+
+  <!-- Arrow 2 <-> 3 -->
+  <line class="arrow-bi" x1="280" y1="298" x2="280" y2="348"/>
+  <text class="label" x="296" y="328">POST /webhooks/rest/webhook (JSON)</text>
+
+  <!-- ================= 3. RASA PRO ================= -->
+  <rect class="box-ai" x="40" y="348" width="560" height="132" rx="12"/>
+  <text class="title" x="64" y="376">3. Rasa Pro Conversation Engine</text>
+  <text class="code" x="64" y="396">config.yml, data/wordle/play.yml, domain/wordle.yml</text>
+  <text class="sub" x="64" y="420">• SearchReadyLLMCommandGenerator (Gemini 3.1 Flash-Lite)</text>
+  <text class="sub" x="64" y="441">• Routes intent to flows: start_wordle, make_wordle_guess,</text>
+  <text class="sub" x="64" y="462">  give_up_wordle, wordle_rules, or voice_mode</text>
+
+  <!-- Arrow 3 -> 4 -->
+  <line class="arrow" x1="280" y1="480" x2="280" y2="530"/>
+  <text class="label" x="296" y="510">Flow + raw wordle_guess slot (from_llm)</text>
+
+  <!-- ================= 4. CUSTOM ACTIONS ================= -->
+  <rect class="box-py" x="40" y="530" width="560" height="128" rx="12"/>
+  <text class="title" x="64" y="558">4. Rasa Custom Actions</text>
+  <text class="code-py" x="64" y="578">actions/action_wordle.py</text>
+  <text class="sub" x="64" y="602">• lone_word_guess() guard ensures any single 5-letter word</text>
+  <text class="sub" x="64" y="623">  during an active game is scored as a guess</text>
+  <text class="sub" x="64" y="644">• Builds reply text + wordle_board JSON payload</text>
+
+  <!-- Side Box C: SQLite Tracker Store -->
+  <rect class="box-store" x="700" y="526" width="380" height="132" rx="12"/>
+  <text class="title" x="724" y="554">SQLite Tracker Store</text>
+  <text class="code-store" x="724" y="574">rasa_tracker.db (endpoints.yml)</text>
+  <text class="sub" x="724" y="598">Controlled slots (LLM cannot modify):</text>
+  <text class="sub" x="724" y="619">• wordle_answer (secret 5-letter word)</text>
+  <text class="sub" x="724" y="640">• wordle_guesses &amp; wordle_active</text>
+
+  <!-- Arrow Custom Actions <-> SQLite -->
+  <line class="arrow-bi" x1="600" y1="594" x2="700" y2="594"/>
+  <text class="label" x="650" y="584" text-anchor="middle">Slots</text>
+
+  <!-- Arrow 4 <-> 5 -->
+  <line class="arrow-bi" x1="280" y1="658" x2="280" y2="706"/>
+  <text class="label" x="296" y="687">new_answer(), validate(), score(), describe()</text>
+
+  <!-- ================= 5. PURE PYTHON GAME RULES ================= -->
+  <rect class="box-py" x="40" y="706" width="1040" height="110" rx="12"/>
+  <text class="title" x="64" y="734">5. Deterministic Python Game Rules (No LLM Involved)</text>
+  <text class="code-py" x="64" y="754">game/wordle.py, game/curate.py, game/english.py, game/answers.txt</text>
+  <text class="sub" x="64" y="778">• Picks secret answer from 1,143 curated common words (answers.txt) &amp; validates guesses against 8,548 words (english.py)</text>
+  <text class="sub" x="64" y="799">• Runs two-pass duplicate-letter scoring (correct / present / absent) and never deducts a turn for invalid guesses</text>
+</svg>
