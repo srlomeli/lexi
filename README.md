@@ -12,6 +12,8 @@ AI 380: Human-AI Interaction, HW3: Wordle for Everyone (Fall 2026).
 
 Open the link in Chrome, Edge, or Safari. A new game starts by itself.
 
+The public site runs on a Google Cloud VM; see `deploy/gcp/README.md`.
+
 ## How to play
 
 1. Lexi picks a secret 5-letter word. You have **6 guesses**.

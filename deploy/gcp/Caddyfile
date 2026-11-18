@@ -1,0 +1,14 @@
+{
+	admin off
+	auto_https off
+}
+
+:7860 {
+	handle /webhooks/* {
+		reverse_proxy localhost:5005
+	}
+	handle {
+		root * /home/user/app/web
+		file_server
+	}
+}
